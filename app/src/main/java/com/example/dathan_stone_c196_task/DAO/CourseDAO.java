@@ -7,26 +7,27 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
-import com.example.dathan_stone_c196_task.entities.Term;
+
+import com.example.dathan_stone_c196_task.entities.Course;
 
 import java.util.List;
 
 @Dao
-public interface TermDAO {
+public interface CourseDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void saveTerm(Term term);
+    void saveCourse(Course course);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void saveTerms(List<Term> terms);
+    void saveCourses(List<Course> courses);
 
     @Update
-    void updateTerm(Term term);
+    void updateCourse(Course course);
 
     @Delete
-    void deleteTerm(Term term);
+    void deleteCourse(Course course);
 
-    @Query("SELECT * FROM terms")
-    LiveData<List<Term>> findAllTerms();
+    @Query("SELECT * FROM courses")
+    LiveData<List<Course>> findAllCourses();
 
 }

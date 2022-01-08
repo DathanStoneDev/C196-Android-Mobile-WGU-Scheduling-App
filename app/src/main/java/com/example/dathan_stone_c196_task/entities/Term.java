@@ -5,7 +5,6 @@ import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverters;
 
 import com.example.dathan_stone_c196_task.utilities.DateConverter;
 
