@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Dathan_Stone_C196_Task</string>
+    <string name="termListButton">View Terms</string>
+    <string name="courseListButton">View Courses</string>
+    <string name="assessmentListButton">View Assessments</string>
+    <string name="testLineForTermViewButton">Welcome to the terms activity</string>
+    <string name="coursesTestActivity">Welcome to the courses activity</string>
+    <string name="testForAssessments">Welcome to the assessments activity</string>
 </resources>
