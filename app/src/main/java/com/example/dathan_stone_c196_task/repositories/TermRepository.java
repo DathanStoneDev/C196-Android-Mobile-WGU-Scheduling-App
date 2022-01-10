@@ -19,6 +19,12 @@ public class TermRepository {
         AppDatabase db = AppDatabase.getInstance(application);
         termDAO = db.termDAO();
         terms = termDAO.findAllTerms();
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public LiveData<List<Term>> getTerms() {

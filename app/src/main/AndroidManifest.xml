@@ -11,6 +11,7 @@
         android:theme="@style/Theme.Dathan_Stone_C196_Task">
         <activity
             android:name=".activities.AddTermActivity"
+            android:parentActivityName=".activities.TermsActivity"
             android:exported="true" />
         <activity
             android:name=".activities.AssessmentsActivity"
@@ -20,6 +21,7 @@
             android:exported="true" />
         <activity
             android:name=".activities.TermsActivity"
+            android:launchMode="singleTop"
             android:exported="true" />
         <activity
             android:name=".activities.MainActivity"
