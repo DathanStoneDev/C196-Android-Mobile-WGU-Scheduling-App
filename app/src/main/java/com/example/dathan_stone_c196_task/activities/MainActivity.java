@@ -30,30 +30,21 @@ public class MainActivity extends AppCompatActivity {
         assessmentListButton = findViewById(R.id.assessmentListButton);
 
         //Sets the click listener and opens the Terms Activity.
-        termListButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), TermsActivity.class);
-                startActivity(intent);
-            }
+        termListButton.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), TermsActivity.class);
+            startActivity(intent);
         });
 
         //Sets the click listener and opens the Courses Activity.
-        courseListButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), CoursesActivity.class);
-                startActivity(intent);
-            }
+        courseListButton.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), CoursesActivity.class);
+            startActivity(intent);
         });
 
         //Sets the click listener and opens the Assessments Activity.
-        assessmentListButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), AssessmentsActivity.class);
-                startActivity(intent);
-            }
+        assessmentListButton.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), AssessmentsActivity.class);
+            startActivity(intent);
         });
 
 

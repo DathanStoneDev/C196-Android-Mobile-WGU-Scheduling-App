@@ -6,4 +6,9 @@
     <string name="testLineForTermViewButton">Welcome to the terms activity</string>
     <string name="coursesTestActivity">Welcome to the courses activity</string>
     <string name="testForAssessments">Welcome to the assessments activity</string>
+    <string name="add_word" />
+    <string name="save">save</string>
+    <string name="enter_term_title">Enter Term Title</string>
+    <string name="enter_term_end_date">Enter Term End Date</string>
+    <string name="enter_term_start_date">Enter Term Start Date</string>
 </resources>

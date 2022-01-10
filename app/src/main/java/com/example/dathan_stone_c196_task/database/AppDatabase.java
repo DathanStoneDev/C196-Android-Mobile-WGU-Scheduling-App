@@ -21,7 +21,7 @@ import java.util.concurrent.Executors;
 /**
  * Declares the Database and adds the Course, Instructor, Term and Assessment entities to the database.
  */
-@Database(entities = {Course.class, Instructor.class, Term.class, Assessment.class}, version = 1, exportSchema = false)
+@Database(entities = {Course.class, Instructor.class, Term.class, Assessment.class}, version = 2)
 @TypeConverters({DateConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -30,9 +30,9 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract CourseDAO courseDAO();
 
     private static final String DATABASE_NAME = "data.db";
-    private static AppDatabase INSTANCE;
+    private static volatile AppDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 3;
-    static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+    public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
     //Singleton that provides a single DB connection instance.
     public static AppDatabase getInstance(Context context) {
@@ -40,6 +40,7 @@ public abstract class AppDatabase extends RoomDatabase {
             synchronized (AppDatabase.class) {
                 if(INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, DATABASE_NAME)
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }

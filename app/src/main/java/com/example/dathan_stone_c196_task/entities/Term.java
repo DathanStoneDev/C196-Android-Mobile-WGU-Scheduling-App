@@ -2,50 +2,42 @@ package com.example.dathan_stone_c196_task.entities;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
-import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
-import com.example.dathan_stone_c196_task.utilities.DateConverter;
-
-import java.util.Date;
-import java.util.List;
 
 @Entity(tableName = "terms")
 public class Term {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NonNull
+    private int id;
     @ColumnInfo(name="term_title")
     private String title;
     @ColumnInfo(name="term_start_date")
-    private Date startDate;
+    private String startDate;
     @ColumnInfo(name="term_end_date")
-    private Date endDate;
+    private String endDate;
+
+    public Term(String title, String startDate, String endDate) {
+        this.title = title;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+    public int getId() { return id; }
+
+    public void setId(int id) { this.id = id; }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    //terms can have a list of courses
 }
