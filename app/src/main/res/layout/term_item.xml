@@ -27,12 +27,11 @@
             android:id="@+id/term_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Title"
-            android:maxLines="1"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_alignParentStart="true"
             android:layout_toStartOf="@+id/text_view_priority"
-            android:layout_alignParentStart="true">
-        </TextView>
+            android:maxLines="1"
+            android:text="Title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"></TextView>
 
         <TextView
             android:id="@+id/term_start"

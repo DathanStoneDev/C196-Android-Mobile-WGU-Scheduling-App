@@ -55,4 +55,10 @@ public class TermRepository {
         });
     }
 
+    public void deleteAllTerms() {
+        AppDatabase.databaseWriteExecutor.execute(()-> {
+            termDAO.deleteAllTerms();
+        });
+    }
+
 }

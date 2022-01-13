@@ -29,4 +29,7 @@ public interface TermDAO {
     @Query("SELECT * FROM terms")
     LiveData<List<Term>> findAllTerms();
 
+    @Query("DELETE FROM terms")
+    void deleteAllTerms();
+
 }

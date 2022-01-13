@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Dathan_Stone_C196_Task">
         <activity
-            android:name=".activities.AddTermActivity"
+            android:name=".activities.AddEditTermActivity"
             android:parentActivityName=".activities.TermsActivity"
             android:exported="true" />
         <activity

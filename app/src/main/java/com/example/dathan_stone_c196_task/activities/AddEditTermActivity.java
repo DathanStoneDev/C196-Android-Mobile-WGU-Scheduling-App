@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.example.dathan_stone_c196_task.R;
 
 
-public class AddTermActivity extends AppCompatActivity {
+public class AddEditTermActivity extends AppCompatActivity {
 
     public static final String EXTRA_TITLE =
             "com.example.dathan_stone_c196_task.activities.EXTRA_TITLE";
@@ -23,6 +23,9 @@ public class AddTermActivity extends AppCompatActivity {
 
     public static final String EXTRA_END_DATE =
             "com.example.dathan_stone_c196_task.activities.EXTRA_END_DATE";
+
+    public static final String EXTRA_ID =
+            "com.example.dathan_stone_c196_task.activities.EXTRA_ID";
 
     private EditText termTitleInput;
     private EditText termStartInput;
@@ -34,12 +37,21 @@ public class AddTermActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_term);
 
         termTitleInput = findViewById(R.id.termTitleInput);
-        termStartInput = findViewById(R.id.termEndDate);
-        termEndInput = findViewById(R.id.termStartDate);
+        termStartInput = findViewById(R.id.termStartDate);
+        termEndInput = findViewById(R.id.termEndDate);
 
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_close_24);
-        setTitle("Add Term");
+
+        Intent intent = getIntent();
+        if(intent.hasExtra(EXTRA_ID)) {
+            setTitle("Update Term");
+            termTitleInput.setText(intent.getStringExtra(EXTRA_TITLE));
+            termStartInput.setText(intent.getStringExtra(EXTRA_START_DATE));
+            termEndInput.setText(intent.getStringExtra(EXTRA_END_DATE));
+        } else {
+            setTitle("Add Term");
+        }
 
     }
 
@@ -75,6 +87,12 @@ public class AddTermActivity extends AppCompatActivity {
         data.putExtra(EXTRA_TITLE, title);
         data.putExtra(EXTRA_START_DATE, start);
         data.putExtra(EXTRA_END_DATE, end);
+
+        int id = getIntent().getIntExtra(EXTRA_ID, -1);
+
+        if(id != -1) {
+            data.putExtra(EXTRA_ID, id);
+        }
 
         setResult(RESULT_OK, data);
         finish();
