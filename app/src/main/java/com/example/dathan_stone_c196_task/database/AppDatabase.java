@@ -21,7 +21,7 @@ import java.util.concurrent.Executors;
 /**
  * Declares the Database and adds the Course, Instructor, Term and Assessment entities to the database.
  */
-@Database(entities = {Course.class, Instructor.class, Term.class, Assessment.class}, version = 2)
+@Database(entities = {Course.class, Instructor.class, Term.class, Assessment.class}, version = 3)
 @TypeConverters({DateConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
 

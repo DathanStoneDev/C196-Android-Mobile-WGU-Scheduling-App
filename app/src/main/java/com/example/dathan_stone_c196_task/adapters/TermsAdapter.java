@@ -63,13 +63,10 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.TermHolder> 
             textViewStartDate = itemView.findViewById(R.id.term_start);
             textViewEndDate = itemView.findViewById(R.id.term_end);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int position = getAdapterPosition();
-                    if(listener !=null && position != RecyclerView.NO_POSITION) {
-                        listener.OnItemClick(termList.get(position));
-                    }
+            itemView.setOnClickListener(view -> {
+                int position = getAdapterPosition();
+                if(listener !=null && position != RecyclerView.NO_POSITION) {
+                    listener.OnItemClick(termList.get(position));
                 }
             });
         }

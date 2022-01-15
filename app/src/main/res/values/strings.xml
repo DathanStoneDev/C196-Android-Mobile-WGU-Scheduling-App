@@ -11,4 +11,11 @@
     <string name="enter_term_title">Enter Term Title</string>
     <string name="enter_term_end_date">Enter Term End Date</string>
     <string name="enter_term_start_date">Enter Term Start Date</string>
+
+    <string-array name="course_types">
+        <item>In Progress</item>
+        <item>Completed</item>
+        <item>Dropped</item>
+        <item>Plan To Take</item>
+    </string-array>
 </resources>

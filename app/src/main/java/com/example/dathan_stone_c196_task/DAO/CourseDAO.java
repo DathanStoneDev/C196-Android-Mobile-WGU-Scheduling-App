@@ -9,8 +9,10 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.dathan_stone_c196_task.entities.Course;
+import com.example.dathan_stone_c196_task.entities.Instructor;
 
 import java.util.List;
+import java.util.Map;
 
 @Dao
 public interface CourseDAO {
@@ -29,5 +31,10 @@ public interface CourseDAO {
 
     @Query("SELECT * FROM courses")
     LiveData<List<Course>> findAllCourses();
+
+    @Query("SELECT * FROM courses " +
+            "JOIN instructors ON instructors.course = courses.course_title "
+            + "WHERE course_title = :courseTitle")
+    Map<Course, Instructor> findCourseDetails(String courseTitle);
 
 }

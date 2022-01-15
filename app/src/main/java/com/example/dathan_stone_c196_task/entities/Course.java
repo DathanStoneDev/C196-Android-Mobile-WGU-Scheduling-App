@@ -3,11 +3,8 @@ package com.example.dathan_stone_c196_task.entities;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
-
-import com.example.dathan_stone_c196_task.utilities.DateConverter;
-
-import java.util.Date;
 
 @Entity(tableName = "courses")
 public class Course {
@@ -17,36 +14,52 @@ public class Course {
     @ColumnInfo(name = "course_title")
     private String title;
     @ColumnInfo(name = "course_start_date")
-    private Date startDate;
+    private String startDate;
     @ColumnInfo(name = "course_end_date")
-    private Date endDate;
-    //Possibly make enum
+    private String endDate;
     @ColumnInfo(name = "course_status")
     private String status;
     @ColumnInfo(name = "course_note")
     private String note;
 
+    @Ignore
+    public Course(@NonNull String title, String startDate, String endDate, String status, String note) {
+        this.title = title;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = status;
+        this.note = note;
+    }
+
+    public Course(@NonNull String title, String startDate, String endDate, String status) {
+        this.title = title;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = status;
+    }
+
+    @NonNull
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(@NonNull String title) {
         this.title = title;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
@@ -65,6 +78,4 @@ public class Course {
     public void setNote(String note) {
         this.note = note;
     }
-
-    //courses can have multiple assessments
 }

@@ -1,35 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.AddEditTermActivity"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activities.AddEditCourseActivity"
     android:padding="16dp"
     android:orientation="vertical">
 
     <EditText
-        android:id="@+id/termTitleInput"
+        android:id="@+id/courseTitleInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
-        android:hint="Title"
-        android:minHeight="48dp" />
-
-
-    <EditText
-        android:id="@+id/termStartDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Start Date"
-        android:inputType="text"
+        android:hint="Course Title"
         android:minHeight="48dp" />
 
     <EditText
-        android:id="@+id/termEndDate"
+        android:id="@+id/courseStartInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
-        android:hint="End Date"
+        android:hint="Course Start Date"
         android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/courseEndInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="Course End Date"
+        android:minHeight="48dp" />
+
+    <Spinner
+        android:id="@+id/course_type_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+
 
 </LinearLayout>

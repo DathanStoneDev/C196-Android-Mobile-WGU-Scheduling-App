@@ -98,19 +98,16 @@ public class TermsActivity extends AppCompatActivity {
             }
         }).attachToRecyclerView(recyclerView);
 
-        adapter.setOnItemClickListener(new TermsAdapter.OnItemClickListener() {
-            @Override
-            public void OnItemClick(Term term) {
-                Intent intent = new Intent(TermsActivity.this, AddEditTermActivity.class);
-                intent.putExtra(AddEditTermActivity.EXTRA_ID, term.getId());
-                intent.putExtra(AddEditTermActivity.EXTRA_TITLE, term.getTitle());
-                intent.putExtra(AddEditTermActivity.EXTRA_START_DATE, term.getStartDate());
-                intent.putExtra(AddEditTermActivity.EXTRA_END_DATE, term.getEndDate());
+        adapter.setOnItemClickListener(term -> {
+            Intent intent = new Intent(TermsActivity.this, AddEditTermActivity.class);
+            intent.putExtra(AddEditTermActivity.EXTRA_ID, term.getId());
+            intent.putExtra(AddEditTermActivity.EXTRA_TITLE, term.getTitle());
+            intent.putExtra(AddEditTermActivity.EXTRA_START_DATE, term.getStartDate());
+            intent.putExtra(AddEditTermActivity.EXTRA_END_DATE, term.getEndDate());
 
-                resultLauncher.launch(intent);
+            resultLauncher.launch(intent);
 
 
-            }
         });
 
     }

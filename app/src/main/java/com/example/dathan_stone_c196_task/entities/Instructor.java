@@ -11,10 +11,19 @@ public class Instructor {
     @NonNull
     @ColumnInfo(name = "instructor_name")
     private String name;
+    @ColumnInfo(name="course")
+    private String associatedCourse;
     @ColumnInfo(name = "instructor_phone_number")
     private String phoneNumber;
     @ColumnInfo(name = "instructor_email")
     private String email;
+
+    public Instructor(@NonNull String name, String associatedCourse, String phoneNumber, String email) {
+        this.name = name;
+        this.associatedCourse = associatedCourse;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
 
     @NonNull
     public String getName() {
@@ -29,15 +38,11 @@ public class Instructor {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getAssociatedCourse() {
+        return associatedCourse;
     }
 }

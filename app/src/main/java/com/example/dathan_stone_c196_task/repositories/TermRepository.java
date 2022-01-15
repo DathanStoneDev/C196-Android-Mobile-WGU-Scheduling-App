@@ -49,12 +49,6 @@ public class TermRepository {
         });
     }
 
-    public void saveTerm(Term term) {
-        AppDatabase.databaseWriteExecutor.execute(()-> {
-            termDAO.saveTerm(term);
-        });
-    }
-
     public void deleteAllTerms() {
         AppDatabase.databaseWriteExecutor.execute(()-> {
             termDAO.deleteAllTerms();
