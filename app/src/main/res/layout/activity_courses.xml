@@ -10,8 +10,9 @@
         android:id="@+id/recycler_view_courses"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/term_item"
-        />
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:listitem="@layout/term_item" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addNewCourseButton"

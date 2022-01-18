@@ -123,7 +123,6 @@ public class TermsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()) {
             case R.id.delete_all_terms:
-                termViewModel.deleteAllTerms();
                 Toast.makeText(this, "All terms deleted", Toast.LENGTH_SHORT).show();
                 return true;
             default:

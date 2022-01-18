@@ -32,8 +32,6 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.TermHolder> 
     public void onBindViewHolder(@NonNull TermHolder holder, int position) {
         Term currentTerm = termList.get(position);
         holder.textViewTitle.setText(currentTerm.getTitle());
-        holder.textViewStartDate.setText(currentTerm.getStartDate());
-        holder.textViewEndDate.setText(currentTerm.getEndDate());
     }
 
     //Determines how many items you want to return.
@@ -54,14 +52,10 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.TermHolder> 
 
     class TermHolder extends RecyclerView.ViewHolder {
         private TextView textViewTitle;
-        private TextView textViewStartDate;
-        private TextView textViewEndDate;
 
         public TermHolder(@NonNull View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.term_title);
-            textViewStartDate = itemView.findViewById(R.id.term_start);
-            textViewEndDate = itemView.findViewById(R.id.term_end);
 
             itemView.setOnClickListener(view -> {
                 int position = getAdapterPosition();

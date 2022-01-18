@@ -64,5 +64,16 @@ public class CoursesActivity extends AppCompatActivity {
             Intent intent = new Intent(view.getContext(), AddEditCourseActivity.class);
             resultLauncher.launch(intent);
         });
+
+        adapter.setOnItemClickListener(course -> {
+            Intent intent = new Intent(CoursesActivity.this, AddEditCourseActivity.class);
+            intent.putExtra(AddEditTermActivity.EXTRA_TITLE, course.getTitle());
+            intent.putExtra(AddEditTermActivity.EXTRA_START_DATE, course.getStartDate());
+            intent.putExtra(AddEditTermActivity.EXTRA_END_DATE, course.getEndDate());
+
+            resultLauncher.launch(intent);
+
+
+        });
     }
 }

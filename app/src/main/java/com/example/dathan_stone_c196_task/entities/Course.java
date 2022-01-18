@@ -9,8 +9,10 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "courses")
 public class Course {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NonNull
+    @ColumnInfo(name = "course_id")
+    private int id;
     @ColumnInfo(name = "course_title")
     private String title;
     @ColumnInfo(name = "course_start_date")
@@ -38,12 +40,19 @@ public class Course {
         this.status = status;
     }
 
-    @NonNull
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(@NonNull String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 

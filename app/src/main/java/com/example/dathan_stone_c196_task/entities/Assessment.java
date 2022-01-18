@@ -11,14 +11,26 @@ import java.util.Date;
 
 @Entity(tableName = "assessments")
 public class Assessment {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NonNull
+    @ColumnInfo(name = "assessment_id")
+    private int id;
     @ColumnInfo(name = "assessment_type")
     private String type;
     @ColumnInfo(name = "assessment_start_date")
     private Date startDate;
     @ColumnInfo(name = "assessment_end_date")
     private Date endDate;
+    @ColumnInfo(name = "course_id")
+    private int courseId;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getType() {
         return type;
@@ -42,5 +54,13 @@ public class Assessment {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public int getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
     }
 }

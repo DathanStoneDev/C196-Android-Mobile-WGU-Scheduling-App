@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dathan_stone_c196_task.R;
 import com.example.dathan_stone_c196_task.entities.Course;
+import com.example.dathan_stone_c196_task.entities.Term;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
 public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CourseHolder> {
 
     private List<Course> courses = new ArrayList<>();
+    private CoursesAdapter.OnItemClickListener listener;
 
     @NonNull
     @Override
@@ -52,8 +54,16 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CourseHo
 
             itemView.setOnClickListener(view -> {
                 int position = getAdapterPosition();
-                courses.get(position);
+                listener.OnItemClick(courses.get(position));
             });
         }
+    }
+
+    public interface OnItemClickListener {
+        void OnItemClick(Course course);
+    }
+
+    public void setOnItemClickListener(CoursesAdapter.OnItemClickListener listener) {
+        this.listener = listener;
     }
 }
