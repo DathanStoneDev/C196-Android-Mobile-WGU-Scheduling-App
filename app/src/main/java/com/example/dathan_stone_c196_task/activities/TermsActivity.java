@@ -115,7 +115,7 @@ public class TermsActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.main_menu, menu);
+        menuInflater.inflate(R.menu.term_list_menu, menu);
         return true;
     }
 

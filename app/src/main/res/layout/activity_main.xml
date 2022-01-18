@@ -10,29 +10,49 @@
         android:id="@+id/termListButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="176dp"
+        android:onClick="goToActivity"
         android:text="@string/termListButton"
-        app:layout_constraintBottom_toTopOf="@+id/courseListButton"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="DuplicateSpeakableTextCheck" />
 
     <Button
         android:id="@+id/courseListButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="105dp"
+        android:layout_marginTop="176dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="60dp"
+        android:onClick="goToActivity"
         android:text="@string/courseListButton"
-        app:layout_constraintBottom_toTopOf="@+id/assessmentListButton"
+        app:layout_constraintBottom_toTopOf="@+id/instructorsListButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/termListButton"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/assessmentListButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="400dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="60dp"
+        android:onClick="goToActivity"
         android:text="@string/assessmentListButton"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/termListButton" />
+
+    <Button
+        android:id="@+id/instructorsListButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="16dp"
+        android:onClick="goToActivity"
+        android:text="View Instructors"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/courseListButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
