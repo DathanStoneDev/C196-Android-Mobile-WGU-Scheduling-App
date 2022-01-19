@@ -10,6 +10,7 @@ public class Term {
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
+    @ColumnInfo(name = "term_id")
     private int id;
     @ColumnInfo(name="term_title")
     private String title;
@@ -54,5 +55,10 @@ public class Term {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+    @Override
+    public String toString() {
+        return title;
     }
 }

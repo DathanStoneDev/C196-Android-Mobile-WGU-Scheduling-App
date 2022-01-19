@@ -27,7 +27,8 @@
             android:exported="true" />
         <activity
             android:name=".activities.CoursesActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:launchMode="singleTop" />
         <activity
             android:name=".activities.TermsActivity"
             android:exported="true"

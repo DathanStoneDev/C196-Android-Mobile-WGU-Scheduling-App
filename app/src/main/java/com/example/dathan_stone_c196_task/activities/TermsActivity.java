@@ -69,7 +69,6 @@ public class TermsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_terms);
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        //displays items below each other.
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         final TermsAdapter adapter = new TermsAdapter();

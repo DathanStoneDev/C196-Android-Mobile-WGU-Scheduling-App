@@ -6,8 +6,10 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 import com.example.dathan_stone_c196_task.entities.Term;
+import com.example.dathan_stone_c196_task.entities.TermWithCourses;
 
 import java.util.List;
 
@@ -16,9 +18,6 @@ public interface TermDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void saveTerm(Term term);
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void saveTerms(List<Term> terms);
 
     @Update
     void updateTerm(Term term);
@@ -29,7 +28,16 @@ public interface TermDAO {
     @Query("SELECT * FROM terms")
     LiveData<List<Term>> findAllTerms();
 
+    @Query("SELECT * FROM terms")
+    List<Term> findTermsNotLive();
+
     @Query("DELETE FROM terms")
     void deleteAllTerms();
+
+    @Transaction
+    @Query("SELECT * FROM terms WHERE term_id = :id")
+    TermWithCourses getFullTermDetails(int id);
+
+
 
 }

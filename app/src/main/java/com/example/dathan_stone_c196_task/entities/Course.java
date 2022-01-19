@@ -12,7 +12,7 @@ public class Course {
     @PrimaryKey(autoGenerate = true)
     @NonNull
     @ColumnInfo(name = "course_id")
-    private int id;
+    private int courseId;
     @ColumnInfo(name = "course_title")
     private String title;
     @ColumnInfo(name = "course_start_date")
@@ -23,9 +23,13 @@ public class Course {
     private String status;
     @ColumnInfo(name = "course_note")
     private String note;
+    @ColumnInfo(name = "term_id")
+    private int termId;
+    @ColumnInfo(name = "assessment_id")
+    private int assessmentId;
 
     @Ignore
-    public Course(@NonNull String title, String startDate, String endDate, String status, String note) {
+    public Course(String title, String startDate, String endDate, String status, String note) {
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -33,19 +37,19 @@ public class Course {
         this.note = note;
     }
 
-    public Course(@NonNull String title, String startDate, String endDate, String status) {
+    public Course(String title, String startDate, String endDate, String status) {
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
         this.status = status;
     }
 
-    public int getId() {
-        return id;
+    public int getCourseId() {
+        return courseId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
     }
 
     public String getTitle() {
@@ -86,5 +90,21 @@ public class Course {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public int getTermId() {
+        return termId;
+    }
+
+    public void setTermId(int termId) {
+        this.termId = termId;
+    }
+
+    public int getAssessmentId() {
+        return assessmentId;
+    }
+
+    public void setAssessmentId(int assessmentId) {
+        this.assessmentId = assessmentId;
     }
 }

@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.dathan_stone_c196_task.R;
+import com.example.dathan_stone_c196_task.entities.Term;
+import com.example.dathan_stone_c196_task.viewmodels.TermViewModel;
 
 
 public class AddEditTermActivity extends AppCompatActivity {
@@ -82,7 +84,7 @@ public class AddEditTermActivity extends AppCompatActivity {
             Toast.makeText(this, "Please ensure all fields are filled out", Toast.LENGTH_SHORT).show();
             return;
         }
-        //See how to insert with ViewModel
+
         Intent data = new Intent();
         data.putExtra(EXTRA_TITLE, title);
         data.putExtra(EXTRA_START_DATE, start);

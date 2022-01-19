@@ -31,9 +31,10 @@ public class CoursesActivity extends AppCompatActivity {
             String start;
             String end;
             String status;
+            int id;
 
 
-            if(code == RESULT_OK) {
+            if(!data.hasExtra(AddEditCourseActivity.EXTRA_COURSE_ID)) {
                 title = data.getStringExtra(AddEditCourseActivity.EXTRA_COURSE_TITLE);
                 start = data.getStringExtra(AddEditCourseActivity.EXTRA_COURSE_START);
                 end = data.getStringExtra(AddEditCourseActivity.EXTRA_COURSE_END);
@@ -41,6 +42,20 @@ public class CoursesActivity extends AppCompatActivity {
 
                 Course course = new Course(title, start, end, status);
                 courseViewModel.insert(course);
+            } else if (data.hasExtra(AddEditCourseActivity.EXTRA_COURSE_ID)) {
+
+                id = data.getIntExtra(AddEditCourseActivity.EXTRA_COURSE_ID, -1);
+
+                title = data.getStringExtra(AddEditCourseActivity.EXTRA_COURSE_TITLE);
+                start = data.getStringExtra(AddEditCourseActivity.EXTRA_COURSE_START);
+                end = data.getStringExtra(AddEditCourseActivity.EXTRA_COURSE_END);
+                status = data.getStringExtra(AddEditCourseActivity.EXTRA_COURSE_TYPE);
+
+
+                Course course = new Course(title, start, end, status);
+                course.setCourseId(id);
+                courseViewModel.update(course);
+
             }
         }
     });
@@ -67,9 +82,11 @@ public class CoursesActivity extends AppCompatActivity {
 
         adapter.setOnItemClickListener(course -> {
             Intent intent = new Intent(CoursesActivity.this, AddEditCourseActivity.class);
-            intent.putExtra(AddEditTermActivity.EXTRA_TITLE, course.getTitle());
-            intent.putExtra(AddEditTermActivity.EXTRA_START_DATE, course.getStartDate());
-            intent.putExtra(AddEditTermActivity.EXTRA_END_DATE, course.getEndDate());
+            intent.putExtra(AddEditCourseActivity.EXTRA_COURSE_ID, course.getCourseId());
+            intent.putExtra(AddEditCourseActivity.EXTRA_COURSE_TITLE, course.getTitle());
+            intent.putExtra(AddEditCourseActivity.EXTRA_COURSE_START, course.getStartDate());
+            intent.putExtra(AddEditCourseActivity.EXTRA_COURSE_END, course.getEndDate());
+            intent.putExtra(AddEditCourseActivity.EXTRA_COURSE_TYPE, course.getStatus());
 
             resultLauncher.launch(intent);
 

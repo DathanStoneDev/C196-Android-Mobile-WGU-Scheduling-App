@@ -1,5 +1,6 @@
 package com.example.dathan_stone_c196_task.activities;
 
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,11 +15,24 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
+import com.example.dathan_stone_c196_task.DAO.TermDAO;
 import com.example.dathan_stone_c196_task.R;
+import com.example.dathan_stone_c196_task.entities.Term;
+import com.example.dathan_stone_c196_task.repositories.TermRepository;
+import com.example.dathan_stone_c196_task.viewmodels.TermViewModel;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class AddEditCourseActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    public static final String EXTRA_COURSE_ID = "com.example.dathan_stone_c196_task.activities.EXTRA_COURSE_ID";
+    public static final String EXTRA_COURSE_TERM_ID = "com.example.dathan_stone_c196_task.activities.EXTRA_COURSE_TERM_ID";
     public static final String EXTRA_COURSE_TITLE = "com.example.dathan_stone_c196_task.activities.EXTRA_COURSE_TITLE";
     public static final String EXTRA_COURSE_START = "com.example.dathan_stone_c196_task.activities.EXTRA_COURSE_START";
     public static final String EXTRA_COURSE_END = "com.example.dathan_stone_c196_task.activities.EXTRA_COURSE_END";
@@ -27,7 +41,11 @@ public class AddEditCourseActivity extends AppCompatActivity implements AdapterV
     private EditText courseTitleInput;
     private EditText courseStart;
     private EditText courseEnd;
-    private Spinner spinner;
+    private Spinner courseStatusSpinner;
+    private Spinner courseTermSpinner;
+    private ArrayList<Term> allTerms = new ArrayList<>();
+    private TermViewModel termViewModel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,31 +56,48 @@ public class AddEditCourseActivity extends AppCompatActivity implements AdapterV
         courseTitleInput = findViewById(R.id.courseTitleInput);
         courseStart = findViewById(R.id.courseStartInput);
         courseEnd = findViewById(R.id.courseEndInput);
-        spinner = findViewById(R.id.course_type_spinner);
+        courseStatusSpinner = findViewById(R.id.course_type_spinner);
+        courseTermSpinner = findViewById(R.id.course_term_spinner);
 
-        //course status spinner setup
+        //Data passed from the CourseActivity
+        Intent intent = getIntent();
+
+        //course_status spinner setup
         ArrayAdapter<CharSequence>adapter = ArrayAdapter.createFromResource(this, R.array.course_types, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
+        courseStatusSpinner.setAdapter(adapter);
+        courseStatusSpinner.setOnItemSelectedListener(this);
+
+        //course_term spinner setup
+        ArrayAdapter<Term> courseTermAdapter = new ArrayAdapter<Term>(this, android.R.layout.simple_spinner_dropdown_item, allTerms);
+        courseTermAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        courseTermSpinner.setAdapter(courseTermAdapter);
+        termViewModel = new ViewModelProvider(this).get(TermViewModel.class);
+        termViewModel.getTerms().observe(this, terms -> {
+            allTerms.addAll(terms);
+            courseTermAdapter.notifyDataSetChanged();
+        });
 
 
-
-
-
+        /*Checks for a Course ID. If a Course ID exist, this signals an update to an existing entry.
+          else, it sets the title to "add course" and has blank editable text fields. */
+        if(intent.hasExtra(EXTRA_COURSE_ID)) {
+            setTitle("Update Course");
+            courseTitleInput.setText(intent.getStringExtra(EXTRA_COURSE_TITLE));
+            courseStart.setText(intent.getStringExtra(EXTRA_COURSE_START));
+            courseEnd.setText(intent.getStringExtra(EXTRA_COURSE_END));
+            courseStatusSpinner.setSelection(adapter.getPosition(intent.getStringExtra(EXTRA_COURSE_TYPE)));
+        } else {
+            setTitle("Add Course");
+        }
     }
 
-    /**
-     * Gets the selected course status from the spinner object.
-     * @param parent
-     * @param view
-     * @param i
-     * @param l
-     */
-    @Override
+   @Override
     public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
         String selectedType = parent.getItemAtPosition(i).toString();
+
         Toast.makeText(this, selectedType, Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
@@ -92,15 +127,21 @@ public class AddEditCourseActivity extends AppCompatActivity implements AdapterV
         String title = courseTitleInput.getText().toString();
         String start = courseStart.getText().toString();
         String end = courseEnd.getText().toString();
-        String status = spinner.getSelectedItem().toString();
-
+        String status = courseStatusSpinner.getSelectedItem().toString();
+        int id = getIntent().getIntExtra(EXTRA_COURSE_ID, -1);
         Intent data = new Intent();
+
         data.putExtra(EXTRA_COURSE_TITLE, title);
         data.putExtra(EXTRA_COURSE_START, start);
         data.putExtra(EXTRA_COURSE_END, end);
         data.putExtra(EXTRA_COURSE_TYPE, status);
 
+        if(id != -1) {
+            data.putExtra(EXTRA_COURSE_ID, id);
+        }
+
         setResult(RESULT_OK, data);
+        System.out.println(data.getStringExtra(EXTRA_COURSE_TYPE) + " - From the save");
         finish();
     }
 }
