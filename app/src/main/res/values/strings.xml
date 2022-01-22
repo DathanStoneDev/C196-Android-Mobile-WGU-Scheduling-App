@@ -18,4 +18,9 @@
         <item>Dropped</item>
         <item>Plan To Take</item>
     </string-array>
+
+    <string-array name="assessment_types">
+        <item>Performance Assessment</item>
+        <item>Objective Assessment</item>
+    </string-array>
 </resources>

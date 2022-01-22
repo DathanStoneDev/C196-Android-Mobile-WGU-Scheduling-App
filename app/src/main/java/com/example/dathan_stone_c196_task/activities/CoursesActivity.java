@@ -32,6 +32,7 @@ public class CoursesActivity extends AppCompatActivity {
             String end;
             String status;
             int id;
+            int termId;
 
 
             if(!data.hasExtra(AddEditCourseActivity.EXTRA_COURSE_ID)) {
@@ -39,8 +40,10 @@ public class CoursesActivity extends AppCompatActivity {
                 start = data.getStringExtra(AddEditCourseActivity.EXTRA_COURSE_START);
                 end = data.getStringExtra(AddEditCourseActivity.EXTRA_COURSE_END);
                 status = data.getStringExtra(AddEditCourseActivity.EXTRA_COURSE_TYPE);
+                termId = data.getIntExtra(AddEditCourseActivity.EXTRA_COURSE_TERM_ID, -1);
 
-                Course course = new Course(title, start, end, status);
+                //Course course = new Course(title, start, end, status);
+                Course course = new Course(title, start, end, status, termId);
                 courseViewModel.insert(course);
             } else if (data.hasExtra(AddEditCourseActivity.EXTRA_COURSE_ID)) {
 

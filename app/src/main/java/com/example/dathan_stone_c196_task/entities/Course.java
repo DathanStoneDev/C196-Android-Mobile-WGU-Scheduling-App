@@ -37,11 +37,20 @@ public class Course {
         this.note = note;
     }
 
+    @Ignore
     public Course(String title, String startDate, String endDate, String status) {
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
         this.status = status;
+    }
+
+    public Course(String title, String startDate, String endDate, String status, int termId) {
+        this.title = title;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = status;
+        this.termId = termId;
     }
 
     public int getCourseId() {
@@ -106,5 +115,10 @@ public class Course {
 
     public void setAssessmentId(int assessmentId) {
         this.assessmentId = assessmentId;
+    }
+
+    @Override
+    public String toString() {
+        return title;
     }
 }

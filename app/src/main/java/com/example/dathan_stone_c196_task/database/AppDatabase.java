@@ -7,6 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
+import com.example.dathan_stone_c196_task.DAO.AssessmentDAO;
 import com.example.dathan_stone_c196_task.DAO.CourseDAO;
 import com.example.dathan_stone_c196_task.DAO.TermDAO;
 import com.example.dathan_stone_c196_task.entities.Assessment;
@@ -21,13 +22,14 @@ import java.util.concurrent.Executors;
 /**
  * Declares the Database and adds the Course, Instructor, Term and Assessment entities to the database.
  */
-@Database(entities = {Course.class, Instructor.class, Term.class, Assessment.class}, version = 6)
+@Database(entities = {Course.class, Instructor.class, Term.class, Assessment.class}, version = 8)
 @TypeConverters({DateConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
 
     //DAOs that will be exposed via abstract getter methods
     public abstract TermDAO termDAO();
     public abstract CourseDAO courseDAO();
+    public abstract AssessmentDAO assessmentDAO();
 
     private static final String DATABASE_NAME = "data.db";
     private static volatile AppDatabase INSTANCE;

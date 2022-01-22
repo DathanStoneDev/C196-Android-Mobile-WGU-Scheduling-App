@@ -1,6 +1,5 @@
 package com.example.dathan_stone_c196_task.activities;
 
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,19 +14,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.dathan_stone_c196_task.DAO.TermDAO;
 import com.example.dathan_stone_c196_task.R;
 import com.example.dathan_stone_c196_task.entities.Term;
-import com.example.dathan_stone_c196_task.repositories.TermRepository;
 import com.example.dathan_stone_c196_task.viewmodels.TermViewModel;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 public class AddEditCourseActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -128,6 +121,9 @@ public class AddEditCourseActivity extends AppCompatActivity implements AdapterV
         String start = courseStart.getText().toString();
         String end = courseEnd.getText().toString();
         String status = courseStatusSpinner.getSelectedItem().toString();
+        Term term = (Term) courseTermSpinner.getSelectedItem();
+        int termId = term.getId();
+
         int id = getIntent().getIntExtra(EXTRA_COURSE_ID, -1);
         Intent data = new Intent();
 
@@ -135,6 +131,7 @@ public class AddEditCourseActivity extends AppCompatActivity implements AdapterV
         data.putExtra(EXTRA_COURSE_START, start);
         data.putExtra(EXTRA_COURSE_END, end);
         data.putExtra(EXTRA_COURSE_TYPE, status);
+        data.putExtra(EXTRA_COURSE_TERM_ID, termId);
 
         if(id != -1) {
             data.putExtra(EXTRA_COURSE_ID, id);
@@ -142,6 +139,7 @@ public class AddEditCourseActivity extends AppCompatActivity implements AdapterV
 
         setResult(RESULT_OK, data);
         System.out.println(data.getStringExtra(EXTRA_COURSE_TYPE) + " - From the save");
+        System.out.println(data.getIntExtra(EXTRA_COURSE_TERM_ID, -1) + "- From the save - course Term ID");
         finish();
     }
 }
