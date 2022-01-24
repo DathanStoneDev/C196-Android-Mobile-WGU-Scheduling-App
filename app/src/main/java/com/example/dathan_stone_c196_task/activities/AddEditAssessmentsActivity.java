@@ -16,12 +16,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.dathan_stone_c196_task.R;
-import com.example.dathan_stone_c196_task.entities.Assessment;
 import com.example.dathan_stone_c196_task.entities.Course;
-import com.example.dathan_stone_c196_task.entities.Term;
-import com.example.dathan_stone_c196_task.viewmodels.AssessmentViewModel;
 import com.example.dathan_stone_c196_task.viewmodels.CourseViewModel;
-import com.example.dathan_stone_c196_task.viewmodels.TermViewModel;
 
 import java.util.ArrayList;
 
@@ -52,8 +48,6 @@ public class AddEditAssessmentsActivity extends AppCompatActivity implements Ada
         assessmentEnd = findViewById(R.id.assessmentEndInput);
         assessmentTypeSpinner = findViewById(R.id.assessment_types_spinner);
         courseSpinner = findViewById(R.id.course_assessment_spinner);
-
-        Intent intent = getIntent();
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.assessment_types, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
