@@ -14,7 +14,6 @@ public class TermRepository {
 
     private TermDAO termDAO;
     private LiveData<List<Term>> terms;
-    private List<Term> nonLive;
 
     public TermRepository(Application application) {
         AppDatabase db = AppDatabase.getInstance(application);
@@ -30,14 +29,6 @@ public class TermRepository {
 
     public LiveData<List<Term>> getTerms() {
         return terms;
-    }
-
-    public List<Term> getNonLiveTerms() {
-        AppDatabase.databaseWriteExecutor.execute(()-> {
-            nonLive = termDAO.findTermsNotLive();
-        });
-
-        return nonLive;
     }
 
 

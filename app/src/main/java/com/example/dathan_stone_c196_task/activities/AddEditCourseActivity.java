@@ -138,8 +138,6 @@ public class AddEditCourseActivity extends AppCompatActivity implements AdapterV
         }
 
         setResult(RESULT_OK, data);
-        System.out.println(data.getStringExtra(EXTRA_COURSE_TYPE) + " - From the save");
-        System.out.println(data.getIntExtra(EXTRA_COURSE_TERM_ID, -1) + "- From the save - course Term ID");
         finish();
     }
 }

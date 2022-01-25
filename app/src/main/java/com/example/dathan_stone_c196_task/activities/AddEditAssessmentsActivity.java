@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -37,6 +38,7 @@ public class AddEditAssessmentsActivity extends AppCompatActivity implements Ada
     private Spinner courseSpinner;
     private ArrayList<Course> courses = new ArrayList<>();
     private CourseViewModel courseViewModel;
+    private Button editButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +65,34 @@ public class AddEditAssessmentsActivity extends AppCompatActivity implements Ada
             courseTermAdapter.notifyDataSetChanged();
         });
 
-        setTitle("Add Assessment");
+        Intent intent = getIntent();
+        if(intent.hasExtra(EXTRA_ASSESSMENT_ID)) {
+            setTitle("Assessment Details");
+            assessmentTitleInput.setText(intent.getStringExtra(EXTRA_ASSESSMENT_TITLE));
+            assessmentStart.setText(intent.getStringExtra(EXTRA_ASSESSMENT_START));
+            assessmentEnd.setText(intent.getStringExtra(EXTRA_ASSESSMENT_END));
+            assessmentTypeSpinner.setSelection(adapter.getPosition(intent.getStringExtra(EXTRA_ASSESSMENT_TYPE)));
+            courseSpinner.setSelection(adapter.getPosition(intent.getStringExtra(EXTRA_ASSESSMENT_COURSE_ID)));
+
+        } else {
+            setTitle("Add Assessment");
+        }
+
+        assessmentTitleInput.setFocusable(false);
+        assessmentStart.setFocusable(false);
+        assessmentEnd.setFocusable(false);
+        assessmentTypeSpinner.setEnabled(false);
+        courseSpinner.setEnabled(false);
+
+        editButton = findViewById(R.id.edit_assessment_button);
+        editButton.setOnClickListener(view -> {
+            assessmentTitleInput.setFocusableInTouchMode(true);
+            assessmentStart.setFocusableInTouchMode(true);
+            assessmentEnd.setFocusableInTouchMode(true);
+            assessmentTypeSpinner.setEnabled(true);
+            courseSpinner.setEnabled(true);
+            setTitle("Update Assessment");
+        });
 
     }
 

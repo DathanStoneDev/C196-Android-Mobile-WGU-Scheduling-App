@@ -68,6 +68,13 @@ public class AssessmentsActivity extends AppCompatActivity  {
             public void DetailsForItem(Assessment assessment) {
                Intent intent = new Intent(AssessmentsActivity.this, AddEditAssessmentsActivity.class);
                intent.putExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_ID, assessment.getId());
+               intent.putExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_TITLE, assessment.getAssessmentTitle());
+               intent.putExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_TYPE, assessment.getType());
+               intent.putExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_START, assessment.getStartDate());
+               intent.putExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_END, assessment.getEndDate());
+               intent.putExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_COURSE_ID, assessment.getCourseId());
+
+               resultLauncher.launch(intent);
             }
         });
         recyclerView.setAdapter(adapter);
