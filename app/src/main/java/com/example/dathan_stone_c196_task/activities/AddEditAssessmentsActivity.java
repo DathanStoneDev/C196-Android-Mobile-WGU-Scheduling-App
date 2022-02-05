@@ -50,6 +50,7 @@ public class AddEditAssessmentsActivity extends AppCompatActivity implements Ada
         assessmentEnd = findViewById(R.id.assessmentEndInput);
         assessmentTypeSpinner = findViewById(R.id.assessment_types_spinner);
         courseSpinner = findViewById(R.id.course_assessment_spinner);
+        editButton = findViewById(R.id.edit_assessment_button);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.assessment_types, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -73,18 +74,19 @@ public class AddEditAssessmentsActivity extends AppCompatActivity implements Ada
             assessmentEnd.setText(intent.getStringExtra(EXTRA_ASSESSMENT_END));
             assessmentTypeSpinner.setSelection(adapter.getPosition(intent.getStringExtra(EXTRA_ASSESSMENT_TYPE)));
             courseSpinner.setSelection(adapter.getPosition(intent.getStringExtra(EXTRA_ASSESSMENT_COURSE_ID)));
+            assessmentTitleInput.setFocusable(false);
+            assessmentStart.setFocusable(false);
+            assessmentEnd.setFocusable(false);
+            assessmentTypeSpinner.setEnabled(false);
+            courseSpinner.setEnabled(false);
+            editButton.setVisibility(View.VISIBLE);
+
 
         } else {
             setTitle("Add Assessment");
+            editButton.setVisibility(View.INVISIBLE);
         }
 
-        assessmentTitleInput.setFocusable(false);
-        assessmentStart.setFocusable(false);
-        assessmentEnd.setFocusable(false);
-        assessmentTypeSpinner.setEnabled(false);
-        courseSpinner.setEnabled(false);
-
-        editButton = findViewById(R.id.edit_assessment_button);
         editButton.setOnClickListener(view -> {
             assessmentTitleInput.setFocusableInTouchMode(true);
             assessmentStart.setFocusableInTouchMode(true);
@@ -133,6 +135,10 @@ public class AddEditAssessmentsActivity extends AppCompatActivity implements Ada
         int courseId = course.getCourseId();
 
         Intent data = new Intent();
+        int assessmentId = getIntent().getIntExtra(EXTRA_ASSESSMENT_ID, -1);
+        if(assessmentId != -1) {
+            data.putExtra(EXTRA_ASSESSMENT_ID, assessmentId);
+        }
         data.putExtra(EXTRA_ASSESSMENT_TITLE, title);
         data.putExtra(EXTRA_ASSESSMENT_START, start);
         data.putExtra(EXTRA_ASSESSMENT_END, end);

@@ -65,20 +65,14 @@ public class AssessmentsAdapter extends RecyclerView.Adapter<AssessmentsAdapter.
             detailView = itemView.findViewById(R.id.assessment_details);
             deleteView = itemView.findViewById(R.id.delete_assessment);
 
-            deleteView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int position = getAdapterPosition();
-                    listener.DeleteItem(assessments.get(position));
-                }
+            deleteView.setOnClickListener(view -> {
+                int position = getAdapterPosition();
+                listener.DeleteItem(assessments.get(position));
             });
 
-            detailView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int position = getAdapterPosition();
-                    listener.DetailsForItem(assessments.get(position));
-                }
+            detailView.setOnClickListener(view -> {
+                int position = getAdapterPosition();
+                listener.DetailsForItem(assessments.get(position));
             });
         }
     }

@@ -32,8 +32,9 @@ public class AssessmentsActivity extends AppCompatActivity  {
             String start;
             String end;
             int courseId;
+            int assessmentId;
 
-            if(code == RESULT_OK) {
+            if(code == RESULT_OK && !data.hasExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_ID)) {
                 title = data.getStringExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_TITLE);
                 type = data.getStringExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_TYPE);
                 start = data.getStringExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_START);
@@ -44,6 +45,17 @@ public class AssessmentsActivity extends AppCompatActivity  {
                 assessmentViewModel.insert(assessment);
 
 
+            } else if(code == RESULT_OK && data.hasExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_ID)) {
+                assessmentId = data.getIntExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_ID, -1);
+                title = data.getStringExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_TITLE);
+                type = data.getStringExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_TYPE);
+                start = data.getStringExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_START);
+                end = data.getStringExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_END);
+                courseId = data.getIntExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_COURSE_ID, -1);
+
+                Assessment assessment = new Assessment(title, type, start, end, courseId);
+                assessment.setId(assessmentId);
+                assessmentViewModel.update(assessment);
             }
 
         }
@@ -88,7 +100,7 @@ public class AssessmentsActivity extends AppCompatActivity  {
             resultLauncher.launch(intent);
         });
 
-        //Override OnClick, make a switch statment, check fro view IDs then do methods.
+        //Override OnClick, make a switch statment, check for view IDs then do methods.
 
 
 
