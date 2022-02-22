@@ -3,6 +3,7 @@ package com.example.dathan_stone_c196_task.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,7 +18,13 @@ import java.util.List;
 public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.TermHolder> {
 
     private List<Term> termList = new ArrayList<>();
-    private OnItemClickListener listener;
+    private TermsAdapter.OnItemClickListener listener;
+
+    public TermsAdapter (OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+
 
     @NonNull
     @Override
@@ -52,25 +59,29 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.TermHolder> 
 
     class TermHolder extends RecyclerView.ViewHolder {
         private TextView textViewTitle;
+        private ImageButton detailView;
+        private ImageButton deleteView;
 
         public TermHolder(@NonNull View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.term_title);
+            detailView = itemView.findViewById(R.id.term_details);
+            deleteView = itemView.findViewById(R.id.term_delete);
 
-            itemView.setOnClickListener(view -> {
+            deleteView.setOnClickListener(view -> {
                 int position = getAdapterPosition();
-                if(listener !=null && position != RecyclerView.NO_POSITION) {
-                    listener.OnItemClick(termList.get(position));
-                }
+                listener.deleteTerm(termList.get(position));
+            });
+
+            detailView.setOnClickListener(view -> {
+                int position = getAdapterPosition();
+                listener.detailsForTerm(termList.get(position));
             });
         }
     }
 
     public interface OnItemClickListener {
-        void OnItemClick(Term term);
-    }
-
-    public void setOnItemClickListener(OnItemClickListener listener) {
-         this.listener = listener;
+        void deleteTerm(Term term);
+        void detailsForTerm(Term term);
     }
 }

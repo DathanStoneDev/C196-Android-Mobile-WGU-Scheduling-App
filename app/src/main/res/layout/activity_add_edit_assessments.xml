@@ -16,20 +16,9 @@
         android:minHeight="48dp" />
 
     <EditText
-        android:id="@+id/assessmentStartInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:hint="Assessment Start Date"
-        android:minHeight="48dp" />
-
-    <EditText
-        android:id="@+id/assessmentEndInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:hint="Assessment End Date"
-        android:minHeight="48dp" />
+        android:id="@+id/assessment_date_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <Spinner
         android:id="@+id/assessment_types_spinner"

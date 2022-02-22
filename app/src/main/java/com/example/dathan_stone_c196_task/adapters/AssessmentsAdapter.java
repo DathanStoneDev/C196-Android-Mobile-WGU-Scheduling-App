@@ -83,9 +83,5 @@ public class AssessmentsAdapter extends RecyclerView.Adapter<AssessmentsAdapter.
         void DetailsForItem(Assessment assessment);
     }
 
-    public void setOnItemClickListener(AssessmentsAdapter.OnItemClickListener listener) {
-        this.listener = listener;
-    }
-
 
 }

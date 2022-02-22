@@ -71,7 +71,24 @@ public class TermsActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        final TermsAdapter adapter = new TermsAdapter();
+        final TermsAdapter adapter = new TermsAdapter(new TermsAdapter.OnItemClickListener() {
+
+            @Override
+            public void deleteTerm(Term term) {
+                termViewModel.delete(term);
+            }
+
+            @Override
+            public void detailsForTerm(Term term) {
+                Intent intent = new Intent(TermsActivity.this, AddEditTermActivity.class);
+                intent.putExtra(AddEditTermActivity.EXTRA_ID, term.getId());
+                intent.putExtra(AddEditTermActivity.EXTRA_TITLE, term.getTitle());
+                intent.putExtra(AddEditTermActivity.EXTRA_START_DATE, term.getStartDate());
+                intent.putExtra(AddEditTermActivity.EXTRA_END_DATE, term.getEndDate());
+
+                resultLauncher.launch(intent);
+            }
+        });
         recyclerView.setAdapter(adapter);
 
         termViewModel = new ViewModelProvider(this).get(TermViewModel.class);
@@ -82,33 +99,6 @@ public class TermsActivity extends AppCompatActivity {
             Intent intent = new Intent(view.getContext(), AddEditTermActivity.class);
             resultLauncher.launch(intent);
         });
-
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
-                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                termViewModel.delete(adapter.getTermAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(TermsActivity.this, "Term Deleted", Toast.LENGTH_SHORT).show();
-            }
-        }).attachToRecyclerView(recyclerView);
-
-        adapter.setOnItemClickListener(term -> {
-            Intent intent = new Intent(TermsActivity.this, AddEditTermActivity.class);
-            intent.putExtra(AddEditTermActivity.EXTRA_ID, term.getId());
-            intent.putExtra(AddEditTermActivity.EXTRA_TITLE, term.getTitle());
-            intent.putExtra(AddEditTermActivity.EXTRA_START_DATE, term.getStartDate());
-            intent.putExtra(AddEditTermActivity.EXTRA_END_DATE, term.getEndDate());
-
-            resultLauncher.launch(intent);
-
-
-        });
-
     }
 
     @Override

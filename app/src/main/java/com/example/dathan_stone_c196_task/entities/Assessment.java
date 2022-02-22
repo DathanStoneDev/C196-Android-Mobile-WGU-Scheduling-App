@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey;
 
 import com.example.dathan_stone_c196_task.utilities.DateConverter;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity(tableName = "assessments")
@@ -21,17 +22,14 @@ public class Assessment {
     @ColumnInfo(name = "assessment_type")
     private String type;
     @ColumnInfo(name = "assessment_start_date")
-    private String startDate;
-    @ColumnInfo(name = "assessment_end_date")
-    private String endDate;
+    private Date startDate;
     @ColumnInfo(name = "course_id")
     private int courseId;
 
-    public Assessment(String assessmentTitle, String type, String startDate, String endDate, int courseId) {
+    public Assessment(String assessmentTitle, String type, Date startDate, int courseId) {
         this.assessmentTitle = assessmentTitle;
         this.type = type;
         this.startDate = startDate;
-        this.endDate = endDate;
         this.courseId = courseId;
     }
 
@@ -59,20 +57,12 @@ public class Assessment {
         this.type = type;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
-    }
-
-    public String getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
     }
 
     public int getCourseId() {

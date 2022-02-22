@@ -18,6 +18,8 @@ import com.example.dathan_stone_c196_task.entities.Assessment;
 import com.example.dathan_stone_c196_task.viewmodels.AssessmentViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.Date;
+
 public class AssessmentsActivity extends AppCompatActivity  {
 
     private AssessmentViewModel assessmentViewModel;
@@ -29,19 +31,17 @@ public class AssessmentsActivity extends AppCompatActivity  {
             Intent data = result.getData();
             String title;
             String type;
-            String start;
-            String end;
+            Date date;
             int courseId;
             int assessmentId;
 
             if(code == RESULT_OK && !data.hasExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_ID)) {
                 title = data.getStringExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_TITLE);
                 type = data.getStringExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_TYPE);
-                start = data.getStringExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_START);
-                end = data.getStringExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_END);
+                date = new Date(data.getLongExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_START, -1));
                 courseId = data.getIntExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_COURSE_ID, -1);
 
-                Assessment assessment = new Assessment(title, type, start, end, courseId);
+                Assessment assessment = new Assessment(title, type, date, courseId);
                 assessmentViewModel.insert(assessment);
 
 
@@ -49,11 +49,11 @@ public class AssessmentsActivity extends AppCompatActivity  {
                 assessmentId = data.getIntExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_ID, -1);
                 title = data.getStringExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_TITLE);
                 type = data.getStringExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_TYPE);
-                start = data.getStringExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_START);
-                end = data.getStringExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_END);
+                date = new Date(data.getLongExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_START, -1));
                 courseId = data.getIntExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_COURSE_ID, -1);
 
-                Assessment assessment = new Assessment(title, type, start, end, courseId);
+                Assessment assessment = new Assessment(title, type, date, courseId);
+                System.out.println("This is the updated Date after Long conversion: " + date);
                 assessment.setId(assessmentId);
                 assessmentViewModel.update(assessment);
             }
@@ -78,12 +78,15 @@ public class AssessmentsActivity extends AppCompatActivity  {
 
             @Override
             public void DetailsForItem(Assessment assessment) {
+                //run assementViewModel.getDetails() method here
+                //then grab all info and place here
+
+
                Intent intent = new Intent(AssessmentsActivity.this, AddEditAssessmentsActivity.class);
                intent.putExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_ID, assessment.getId());
                intent.putExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_TITLE, assessment.getAssessmentTitle());
                intent.putExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_TYPE, assessment.getType());
                intent.putExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_START, assessment.getStartDate());
-               intent.putExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_END, assessment.getEndDate());
                intent.putExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_COURSE_ID, assessment.getCourseId());
 
                resultLauncher.launch(intent);
@@ -99,8 +102,6 @@ public class AssessmentsActivity extends AppCompatActivity  {
             Intent intent = new Intent(view.getContext(), AddEditAssessmentsActivity.class);
             resultLauncher.launch(intent);
         });
-
-        //Override OnClick, make a switch statment, check for view IDs then do methods.
 
 
 
