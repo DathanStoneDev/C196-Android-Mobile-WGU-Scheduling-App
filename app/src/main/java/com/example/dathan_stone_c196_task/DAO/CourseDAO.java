@@ -32,4 +32,7 @@ public interface CourseDAO {
     @Query("SELECT * FROM courses")
     LiveData<List<Course>> findAllCourses();
 
+    @Query("SELECT * FROM courses WHERE term_id = :id")
+    LiveData<List<Course>> findTermCourses(int id);
+
 }

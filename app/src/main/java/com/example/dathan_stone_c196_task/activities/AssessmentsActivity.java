@@ -78,8 +78,6 @@ public class AssessmentsActivity extends AppCompatActivity  {
 
             @Override
             public void DetailsForItem(Assessment assessment) {
-                //run assementViewModel.getDetails() method here
-                //then grab all info and place here
 
 
                Intent intent = new Intent(AssessmentsActivity.this, AddEditAssessmentsActivity.class);

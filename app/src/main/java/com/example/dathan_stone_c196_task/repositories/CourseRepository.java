@@ -14,6 +14,7 @@ public class CourseRepository {
 
     private CourseDAO courseDAO;
     private LiveData<List<Course>> courses;
+    private LiveData<List<Course>> termCourses;
 
     public CourseRepository(Application application) {
         AppDatabase db = AppDatabase.getInstance(application);
@@ -45,5 +46,12 @@ public class CourseRepository {
         AppDatabase.databaseWriteExecutor.execute(()-> {
             courseDAO.deleteCourse(course);
         });
+    }
+
+    public LiveData<List<Course>> findTermCourses(int id) {
+        AppDatabase.databaseWriteExecutor.execute(()-> {
+            termCourses = courseDAO.findTermCourses(id);
+        });
+        return termCourses;
     }
 }

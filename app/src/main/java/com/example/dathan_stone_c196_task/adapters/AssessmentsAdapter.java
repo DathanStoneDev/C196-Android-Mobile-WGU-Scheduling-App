@@ -36,16 +36,13 @@ public class AssessmentsAdapter extends RecyclerView.Adapter<AssessmentsAdapter.
     @Override
     public void onBindViewHolder(@NonNull AssessmentHolder holder, int position) {
         Assessment assessment = assessments.get(position);
+        System.out.println("Position: " + position);
         holder.textView.setText(assessment.getAssessmentTitle());
     }
 
     @Override
     public int getItemCount() {
         return assessments.size();
-    }
-
-    public Assessment getAssessmentAt(int position) {
-        return assessments.get(position);
     }
 
 

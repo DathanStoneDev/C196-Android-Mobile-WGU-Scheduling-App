@@ -12,4 +12,20 @@ public class TermWithCourses {
             entityColumn = "term_id"
     )
     public List<Course> courses;
+
+    public Term getTerm() {
+        return term;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setTerm(Term term) {
+        this.term = term;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
 }

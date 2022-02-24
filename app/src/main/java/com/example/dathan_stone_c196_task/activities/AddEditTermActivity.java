@@ -1,18 +1,27 @@
 package com.example.dathan_stone_c196_task.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.dathan_stone_c196_task.R;
+import com.example.dathan_stone_c196_task.adapters.CoursesAdapter;
+import com.example.dathan_stone_c196_task.entities.Course;
 import com.example.dathan_stone_c196_task.entities.Term;
+import com.example.dathan_stone_c196_task.viewmodels.CourseViewModel;
 import com.example.dathan_stone_c196_task.viewmodels.TermViewModel;
+
+import java.util.ArrayList;
 
 
 public class AddEditTermActivity extends AppCompatActivity {
@@ -32,6 +41,7 @@ public class AddEditTermActivity extends AppCompatActivity {
     private EditText termTitleInput;
     private EditText termStartInput;
     private EditText termEndInput;
+    private CourseViewModel courseViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +52,7 @@ public class AddEditTermActivity extends AppCompatActivity {
         termStartInput = findViewById(R.id.termStartDate);
         termEndInput = findViewById(R.id.termEndDate);
 
+        courseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_close_24);
 
@@ -51,11 +62,30 @@ public class AddEditTermActivity extends AppCompatActivity {
             termTitleInput.setText(intent.getStringExtra(EXTRA_TITLE));
             termStartInput.setText(intent.getStringExtra(EXTRA_START_DATE));
             termEndInput.setText(intent.getStringExtra(EXTRA_END_DATE));
+
+            RecyclerView recyclerView = findViewById(R.id.recycler_view_courses);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+            final CoursesAdapter adapter = new CoursesAdapter();
+            recyclerView.setAdapter(adapter);
+            courseViewModel.findTermCourses(intent.getIntExtra(EXTRA_ID, -1)).observe(
+                    this, adapter::setCourseList
+
+            );
         } else {
             setTitle("Add Term");
         }
 
     }
+
+    //something like this may be able to work. Use the intent term ID and pass to loadTermCourses.
+    /*courseSpinner.setAdapter(courseTermAdapter);
+    courseViewModel = new ViewModelProvider(this).get(CourseViewModel .class);
+        courseViewModel.getCourses().observe(this, addCourses -> {
+        courses.addAll(addCourses);
+        courseTermAdapter.notifyDataSetChanged();
+    }); */
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

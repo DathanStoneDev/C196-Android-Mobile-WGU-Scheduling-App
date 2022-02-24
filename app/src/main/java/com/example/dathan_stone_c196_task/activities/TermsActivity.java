@@ -20,9 +20,16 @@ import android.widget.Toast;
 
 import com.example.dathan_stone_c196_task.R;
 import com.example.dathan_stone_c196_task.adapters.TermsAdapter;
+import com.example.dathan_stone_c196_task.entities.Course;
 import com.example.dathan_stone_c196_task.entities.Term;
+import com.example.dathan_stone_c196_task.entities.TermWithCourses;
+import com.example.dathan_stone_c196_task.viewmodels.CourseViewModel;
 import com.example.dathan_stone_c196_task.viewmodels.TermViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 
 public class TermsActivity extends AppCompatActivity {
@@ -68,17 +75,22 @@ public class TermsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_terms);
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.terms_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        final TermsAdapter adapter = new TermsAdapter(new TermsAdapter.OnItemClickListener() {
+        final TermsAdapter termsAdapter = new TermsAdapter(new TermsAdapter.OnItemClickListener() {
 
             @Override
-            public void deleteTerm(Term term) {
-                termViewModel.delete(term);
+            public void deleteTerm(TermWithCourses delete) {
+
             }
 
             @Override
+            public void detailsForTerm(TermWithCourses details) {
+
+            }
+
+            /*@Override
             public void detailsForTerm(Term term) {
                 Intent intent = new Intent(TermsActivity.this, AddEditTermActivity.class);
                 intent.putExtra(AddEditTermActivity.EXTRA_ID, term.getId());
@@ -87,12 +99,12 @@ public class TermsActivity extends AppCompatActivity {
                 intent.putExtra(AddEditTermActivity.EXTRA_END_DATE, term.getEndDate());
 
                 resultLauncher.launch(intent);
-            }
+            } */
         });
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(termsAdapter);
 
         termViewModel = new ViewModelProvider(this).get(TermViewModel.class);
-        termViewModel.getTerms().observe(this, terms -> adapter.setTermList(terms));
+        termViewModel.getTermDetails().observe(this, terms -> termsAdapter.setTermDetailsList(terms));
         
         FloatingActionButton addTermButton = findViewById(R.id.addNewTermButton);
         addTermButton.setOnClickListener(view -> {

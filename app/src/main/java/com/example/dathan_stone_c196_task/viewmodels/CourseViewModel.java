@@ -15,6 +15,7 @@ public class CourseViewModel extends AndroidViewModel {
 
     private CourseRepository courseRepository;
     private LiveData<List<Course>> courses;
+    private LiveData<List<Course>> termCourses;
     public CourseViewModel(@NonNull Application application) {
         super(application);
         courseRepository = new CourseRepository(application);
@@ -34,4 +35,8 @@ public class CourseViewModel extends AndroidViewModel {
     public void delete(Course course) {
         courseRepository.deleteCourse(course);
     }
+
+    public LiveData<List<Course>> findTermCourses(int id) {
+        termCourses = courseRepository.findTermCourses(id);
+        return termCourses; }
 }

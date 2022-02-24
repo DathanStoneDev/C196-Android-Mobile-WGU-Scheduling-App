@@ -1,5 +1,6 @@
 package com.example.dathan_stone_c196_task.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dathan_stone_c196_task.R;
 import com.example.dathan_stone_c196_task.entities.Term;
+import com.example.dathan_stone_c196_task.entities.TermWithCourses;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,7 @@ import java.util.List;
 public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.TermHolder> {
 
     private List<Term> termList = new ArrayList<>();
+    private List<TermWithCourses> termDetailsList = new ArrayList<>();
     private TermsAdapter.OnItemClickListener listener;
 
     public TermsAdapter (OnItemClickListener listener) {
@@ -34,17 +37,27 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.TermHolder> 
         return new TermHolder(itemView);
     }
 
+    public void setTermDetailsList(List<TermWithCourses> termDetailsList) {
+        this.termDetailsList = termDetailsList;
+        notifyDataSetChanged();
+    }
+
     //binds the data
     @Override
     public void onBindViewHolder(@NonNull TermHolder holder, int position) {
-        Term currentTerm = termList.get(position);
-        holder.textViewTitle.setText(currentTerm.getTitle());
+        System.out.println("Position: " + position);
+        TermWithCourses details = termDetailsList.get(position);
+        //TermWithCourses currentTermDetails = termDetailsList.get(position);
+        //System.out.println("Position: " + position);
+        //holder.textViewTitle.setText(currentTermDetails.getTerm().getTitle());
+        holder.textViewTitle.setText(details.term.getTitle());
+        System.out.println("Here: " + holder.textViewTitle.getText());
     }
 
     //Determines how many items you want to return.
     @Override
     public int getItemCount() {
-        return termList.size();
+        return termDetailsList.size();
     }
 
     public void setTermList(List<Term> terms) {
@@ -52,10 +65,7 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.TermHolder> 
         notifyDataSetChanged();
     }
 
-    //Grabs a specific term at a certain index position
-    public Term getTermAt(int position) {
-        return termList.get(position);
-    }
+
 
     class TermHolder extends RecyclerView.ViewHolder {
         private TextView textViewTitle;
@@ -64,24 +74,24 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.TermHolder> 
 
         public TermHolder(@NonNull View itemView) {
             super(itemView);
-            textViewTitle = itemView.findViewById(R.id.term_title);
+            textViewTitle = itemView.findViewById(R.id.term_title_hehe);
             detailView = itemView.findViewById(R.id.term_details);
             deleteView = itemView.findViewById(R.id.term_delete);
 
             deleteView.setOnClickListener(view -> {
                 int position = getAdapterPosition();
-                listener.deleteTerm(termList.get(position));
+                listener.deleteTerm(termDetailsList.get(position));
             });
 
             detailView.setOnClickListener(view -> {
                 int position = getAdapterPosition();
-                listener.detailsForTerm(termList.get(position));
+                listener.detailsForTerm(termDetailsList.get(position));
             });
         }
     }
 
     public interface OnItemClickListener {
-        void deleteTerm(Term term);
-        void detailsForTerm(Term term);
+        void deleteTerm(TermWithCourses delete);
+        void detailsForTerm(TermWithCourses details);
     }
 }
