@@ -1,6 +1,5 @@
 package com.example.dathan_stone_c196_task.adapters;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,7 +74,7 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.TermHolder> 
         public TermHolder(@NonNull View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.term_title_hehe);
-            detailView = itemView.findViewById(R.id.term_details);
+            detailView = itemView.findViewById(R.id.remove_course_from_term);
             deleteView = itemView.findViewById(R.id.term_delete);
 
             deleteView.setOnClickListener(view -> {

@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dathan_stone_c196_task.R;
@@ -26,22 +27,9 @@ import java.util.ArrayList;
 
 public class AddEditTermActivity extends AppCompatActivity {
 
-    public static final String EXTRA_TITLE =
-            "com.example.dathan_stone_c196_task.activities.EXTRA_TITLE";
-
-    public static final String EXTRA_START_DATE =
-            "com.example.dathan_stone_c196_task.activities.EXTRA_START_DATE";
-
-    public static final String EXTRA_END_DATE =
-            "com.example.dathan_stone_c196_task.activities.EXTRA_END_DATE";
-
-    public static final String EXTRA_ID =
-            "com.example.dathan_stone_c196_task.activities.EXTRA_ID";
-
     private EditText termTitleInput;
-    private EditText termStartInput;
-    private EditText termEndInput;
-    private CourseViewModel courseViewModel;
+    private TextView termStartInput;
+    private TextView termEndInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +40,10 @@ public class AddEditTermActivity extends AppCompatActivity {
         termStartInput = findViewById(R.id.termStartDate);
         termEndInput = findViewById(R.id.termEndDate);
 
-        courseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
-
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_close_24);
 
-        Intent intent = getIntent();
-        if(intent.hasExtra(EXTRA_ID)) {
+        /*Intent intent = getIntent();
+        if(intent.hasExtra()) {
             setTitle("Update Term");
             termTitleInput.setText(intent.getStringExtra(EXTRA_TITLE));
             termStartInput.setText(intent.getStringExtra(EXTRA_START_DATE));
@@ -74,17 +60,9 @@ public class AddEditTermActivity extends AppCompatActivity {
             );
         } else {
             setTitle("Add Term");
-        }
+        } */
 
     }
-
-    //something like this may be able to work. Use the intent term ID and pass to loadTermCourses.
-    /*courseSpinner.setAdapter(courseTermAdapter);
-    courseViewModel = new ViewModelProvider(this).get(CourseViewModel .class);
-        courseViewModel.getCourses().observe(this, addCourses -> {
-        courses.addAll(addCourses);
-        courseTermAdapter.notifyDataSetChanged();
-    }); */
 
 
     @Override
@@ -115,7 +93,7 @@ public class AddEditTermActivity extends AppCompatActivity {
             return;
         }
 
-        Intent data = new Intent();
+        /*Intent data = new Intent();
         data.putExtra(EXTRA_TITLE, title);
         data.putExtra(EXTRA_START_DATE, start);
         data.putExtra(EXTRA_END_DATE, end);
@@ -127,6 +105,6 @@ public class AddEditTermActivity extends AppCompatActivity {
         }
 
         setResult(RESULT_OK, data);
-        finish();
+        finish(); */
     }
 }

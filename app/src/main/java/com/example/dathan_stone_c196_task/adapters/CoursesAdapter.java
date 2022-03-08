@@ -3,6 +3,7 @@ package com.example.dathan_stone_c196_task.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -47,6 +48,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CourseHo
     class CourseHolder extends RecyclerView.ViewHolder {
 
         private TextView textViewTitle;
+        private ImageButton detailView;
 
         public CourseHolder(@NonNull View itemView) {
             super(itemView);

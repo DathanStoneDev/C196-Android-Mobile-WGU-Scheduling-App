@@ -36,11 +36,6 @@ public class MainActivity extends AppCompatActivity {
                 intent.setClass(view.getContext(), AssessmentsActivity.class);
                 startActivity(intent);
                 return;
-
-            case R.id.instructorsListButton:
-                intent.setClass(view.getContext(), InstructorsActivity.class);
-                startActivity(intent);
-                return;
             default:
         }
     }

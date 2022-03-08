@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -41,32 +42,7 @@ public class TermsActivity extends AppCompatActivity {
         public void onActivityResult(ActivityResult result) {
             int code = result.getResultCode();
             Intent data = result.getData();
-            String title;
-            String start;
-            String end;
-            int id;
 
-            //Adds term
-            if(code == RESULT_OK && !data.hasExtra(AddEditTermActivity.EXTRA_ID)) {
-
-                title = data.getStringExtra(AddEditTermActivity.EXTRA_TITLE);
-                start = data.getStringExtra(AddEditTermActivity.EXTRA_START_DATE);
-                end = data.getStringExtra(AddEditTermActivity.EXTRA_END_DATE);
-
-                Term term = new Term(title, start, end);
-                termViewModel.insert(term);
-            //Updates term
-            } else if (code == RESULT_OK && data.hasExtra(AddEditTermActivity.EXTRA_ID)) {
-                id = data.getIntExtra(AddEditTermActivity.EXTRA_ID, -1);
-
-                //need if statement to check extra id
-                title = data.getStringExtra(AddEditTermActivity.EXTRA_TITLE);
-                start = data.getStringExtra(AddEditTermActivity.EXTRA_START_DATE);
-                end = data.getStringExtra(AddEditTermActivity.EXTRA_END_DATE);
-                Term term = new Term(title, start, end);
-                term.setId(id);
-                termViewModel.update(term);
-            }
         }
     });
 
@@ -82,24 +58,28 @@ public class TermsActivity extends AppCompatActivity {
 
             @Override
             public void deleteTerm(TermWithCourses delete) {
-
+                if(delete.courses.size() > 0) {
+                    Toast.makeText(TermsActivity.this, "Can not delete because there are courses in this term", Toast.LENGTH_SHORT).show();
+                } else {
+                    termViewModel.delete(delete.term);
+                }
             }
 
             @Override
             public void detailsForTerm(TermWithCourses details) {
 
-            }
+                Intent intent = new Intent(TermsActivity.this, TermDetailsActivity.class);
+                intent.putExtra(TermDetailsActivity.EXTRA_TERM_ID, details.term.getId());
+                intent.putExtra(TermDetailsActivity.EXTRA_TERM_TITLE, details.term.getTitle());
+                intent.putExtra(TermDetailsActivity.EXTRA_TERM_START_DATE, details.term.getStartDate());
+                intent.putExtra(TermDetailsActivity.EXTRA_TERM_END_DATE, details.term.getEndDate());
+                List courseTerms = details.getCourses();
 
-            /*@Override
-            public void detailsForTerm(Term term) {
-                Intent intent = new Intent(TermsActivity.this, AddEditTermActivity.class);
-                intent.putExtra(AddEditTermActivity.EXTRA_ID, term.getId());
-                intent.putExtra(AddEditTermActivity.EXTRA_TITLE, term.getTitle());
-                intent.putExtra(AddEditTermActivity.EXTRA_START_DATE, term.getStartDate());
-                intent.putExtra(AddEditTermActivity.EXTRA_END_DATE, term.getEndDate());
+                intent.putParcelableArrayListExtra(TermDetailsActivity.EXTRA_COURSES_IN_TERM, (ArrayList<? extends Parcelable>) courseTerms);
 
                 resultLauncher.launch(intent);
-            } */
+
+            }
         });
         recyclerView.setAdapter(termsAdapter);
 
