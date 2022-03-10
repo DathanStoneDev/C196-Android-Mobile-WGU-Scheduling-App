@@ -7,6 +7,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity(tableName = "courses")
 public class Course implements Serializable {
@@ -18,9 +19,9 @@ public class Course implements Serializable {
     @ColumnInfo(name = "course_title")
     private String title;
     @ColumnInfo(name = "course_start_date")
-    private String startDate;
+    private Date startDate;
     @ColumnInfo(name = "course_end_date")
-    private String endDate;
+    private Date endDate;
     @ColumnInfo(name = "course_status")
     private String status;
     @ColumnInfo(name = "course_note")
@@ -31,7 +32,7 @@ public class Course implements Serializable {
     private int assessmentId;
 
     @Ignore
-    public Course(String title, String startDate, String endDate, String status, String note) {
+    public Course(String title, Date startDate, Date endDate, String status, String note) {
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -40,14 +41,14 @@ public class Course implements Serializable {
     }
 
     @Ignore
-    public Course(String title, String startDate, String endDate, String status) {
+    public Course(String title, Date startDate, Date endDate, String status) {
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
         this.status = status;
     }
 
-    public Course(String title, String startDate, String endDate, String status, int termId) {
+    public Course(String title, Date startDate, Date endDate, String status, int termId) {
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -71,19 +72,19 @@ public class Course implements Serializable {
         this.title = title;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 

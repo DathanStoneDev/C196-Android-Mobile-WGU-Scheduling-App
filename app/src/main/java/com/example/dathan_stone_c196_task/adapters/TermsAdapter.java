@@ -74,7 +74,7 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.TermHolder> 
         public TermHolder(@NonNull View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.term_title_hehe);
-            detailView = itemView.findViewById(R.id.remove_course_from_term);
+            detailView = itemView.findViewById(R.id.view_term_details);
             deleteView = itemView.findViewById(R.id.term_delete);
 
             deleteView.setOnClickListener(view -> {

@@ -27,7 +27,7 @@
         </TextView>
 
         <ImageButton
-            android:id="@+id/remove_course_from_term"
+            android:id="@+id/view_term_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -47,7 +47,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_toStartOf="@+id/remove_course_from_term"
+            android:layout_toStartOf="@+id/view_term_details"
             android:minHeight="48dp"
             app:srcCompat="@drawable/ic_baseline_delete_24"
             tools:ignore="SpeakableTextPresentCheck"

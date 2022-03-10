@@ -27,39 +27,13 @@ public class CoursesActivity extends AppCompatActivity {
         public void onActivityResult(ActivityResult result) {
             int code = result.getResultCode();
             Intent data = result.getData();
-            String title;
-            String start;
-            String end;
-            String status;
-            int id;
-            int termId;
+
 
 
             if(!data.hasExtra(AddEditCourseActivity.EXTRA_COURSE_ID)) {
-                title = data.getStringExtra(AddEditCourseActivity.EXTRA_COURSE_TITLE);
-                start = data.getStringExtra(AddEditCourseActivity.EXTRA_COURSE_START);
-                end = data.getStringExtra(AddEditCourseActivity.EXTRA_COURSE_END);
-                status = data.getStringExtra(AddEditCourseActivity.EXTRA_COURSE_TYPE);
-                termId = data.getIntExtra(AddEditCourseActivity.EXTRA_COURSE_TERM_ID, -1);
 
-                //Course course = new Course(title, start, end, status);
-                Course course = new Course(title, start, end, status, termId);
-                courseViewModel.insert(course);
             } else if (data.hasExtra(AddEditCourseActivity.EXTRA_COURSE_ID)) {
 
-                id = data.getIntExtra(AddEditCourseActivity.EXTRA_COURSE_ID, -1);
-
-                title = data.getStringExtra(AddEditCourseActivity.EXTRA_COURSE_TITLE);
-                start = data.getStringExtra(AddEditCourseActivity.EXTRA_COURSE_START);
-                end = data.getStringExtra(AddEditCourseActivity.EXTRA_COURSE_END);
-                status = data.getStringExtra(AddEditCourseActivity.EXTRA_COURSE_TYPE);
-                termId = data.getIntExtra(AddEditCourseActivity.EXTRA_COURSE_TERM_ID, -1);
-
-
-                Course course = new Course(title, start, end, status, termId);
-                course.setCourseId(id);
-                System.out.println(termId);
-                courseViewModel.update(course);
 
             }
         }

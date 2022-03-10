@@ -7,7 +7,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,16 +20,14 @@ import android.widget.Toast;
 
 import com.example.dathan_stone_c196_task.R;
 import com.example.dathan_stone_c196_task.adapters.TermsAdapter;
-import com.example.dathan_stone_c196_task.entities.Course;
 import com.example.dathan_stone_c196_task.entities.Term;
 import com.example.dathan_stone_c196_task.entities.TermWithCourses;
-import com.example.dathan_stone_c196_task.viewmodels.CourseViewModel;
 import com.example.dathan_stone_c196_task.viewmodels.TermViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 
 public class TermsActivity extends AppCompatActivity {
@@ -42,6 +39,24 @@ public class TermsActivity extends AppCompatActivity {
         public void onActivityResult(ActivityResult result) {
             int code = result.getResultCode();
             Intent data = result.getData();
+
+            if(code == RESULT_OK && data.hasExtra(TermDetailsActivity.EXTRA_TERM_ID)) {
+                int id = data.getIntExtra(TermDetailsActivity.EXTRA_TERM_ID, -1);
+                String title = data.getStringExtra(TermDetailsActivity.EXTRA_TERM_TITLE);
+                Date startDate = new Date(data.getLongExtra(TermDetailsActivity.EXTRA_TERM_START_DATE, -1));
+                Date endDate = new Date(data.getLongExtra(TermDetailsActivity.EXTRA_TERM_END_DATE, -1));
+
+                Term term = new Term(title, startDate, endDate);
+                term.setId(id);
+                termViewModel.update(term);
+            } else if (code == RESULT_OK && !data.hasExtra(TermDetailsActivity.EXTRA_TERM_ID)){
+                String title = data.getStringExtra(TermDetailsActivity.EXTRA_TERM_TITLE);
+                Date startDate = new Date(data.getLongExtra(TermDetailsActivity.EXTRA_TERM_START_DATE, -1));
+                Date endDate = new Date(data.getLongExtra(TermDetailsActivity.EXTRA_TERM_END_DATE, -1));
+
+                Term term = new Term(title, startDate, endDate);
+                termViewModel.insert(term);
+            }
 
         }
     });
@@ -88,7 +103,7 @@ public class TermsActivity extends AppCompatActivity {
         
         FloatingActionButton addTermButton = findViewById(R.id.addNewTermButton);
         addTermButton.setOnClickListener(view -> {
-            Intent intent = new Intent(view.getContext(), AddEditTermActivity.class);
+            Intent intent = new Intent(view.getContext(), AddTermActivity.class);
             resultLauncher.launch(intent);
         });
     }

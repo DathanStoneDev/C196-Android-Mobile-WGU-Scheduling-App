@@ -17,11 +17,11 @@ public class Term {
     @ColumnInfo(name="term_title")
     private String title;
     @ColumnInfo(name="term_start_date")
-    private String startDate;
+    private Date startDate;
     @ColumnInfo(name="term_end_date")
-    private String endDate;
+    private Date endDate;
 
-    public Term(String title, String startDate, String endDate) {
+    public Term(String title, Date startDate, Date endDate) {
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -43,19 +43,19 @@ public class Term {
         this.title = title;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 

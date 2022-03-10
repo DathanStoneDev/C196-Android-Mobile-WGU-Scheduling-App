@@ -63,6 +63,6 @@ public class TermDetailsActivity extends AppCompatActivity {
         termStartInput.setText(intent.getStringExtra(EXTRA_TERM_START_DATE));
         termEndInput.setText(intent.getStringExtra(EXTRA_TERM_END_DATE));
 
-        System.out.println(coursesInTerm.size());
+
     }
 }

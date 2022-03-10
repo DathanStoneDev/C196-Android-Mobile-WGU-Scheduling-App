@@ -53,7 +53,7 @@ public class CoursesInTermAdapter extends RecyclerView.Adapter<CoursesInTermAdap
 
 
             textViewTitle = itemView.findViewById(R.id.course_in_term_title);
-            removeCourseButton = itemView.findViewById(R.id.remove_course_from_term);
+            removeCourseButton = itemView.findViewById(R.id.view_term_details);
             removeCourseButton.setOnClickListener(view -> {
                 int position = getAdapterPosition();
                 listener.removeCourseFromTerm(courses.get(position));

@@ -16,7 +16,7 @@
             android:name=".activities.AddEditAssessmentsActivity"
             android:exported="true" />
         <activity
-            android:name=".activities.AddEditTermActivity"
+            android:name=".activities.AddTermActivity"
             android:exported="true"
             android:parentActivityName=".activities.TermsActivity" />
         <activity

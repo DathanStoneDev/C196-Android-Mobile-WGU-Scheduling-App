@@ -21,10 +21,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="1dp"
+        android:clipToPadding="false"
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:clipToPadding="false"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
@@ -44,8 +44,8 @@
     <TextView
         android:id="@+id/term_details_start_date"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/term_course_details_title" />
@@ -53,11 +53,21 @@
     <TextView
         android:id="@+id/term_details_end_date"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/term_details_start_date" />
+
+    <ImageButton
+        android:id="@+id/edit_term_end_date_picker"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="356dp"
+        app:layout_constraintBottom_toBottomOf="@+id/term_details_end_date"
+        app:layout_constraintStart_toStartOf="@+id/term_details_end_date"
+        app:srcCompat="@drawable/ic_baseline_calendar_today_24"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
         android:id="@+id/edit_term_details"
@@ -68,6 +78,16 @@
         android:text="Edit Details"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/term_details_end_date" />
+
+    <ImageButton
+        android:id="@+id/edit_term_start_date_picker"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="356dp"
+        app:layout_constraintBottom_toBottomOf="@+id/term_details_start_date"
+        app:layout_constraintStart_toStartOf="@+id/term_details_start_date"
+        app:srcCompat="@drawable/ic_baseline_calendar_today_24"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
