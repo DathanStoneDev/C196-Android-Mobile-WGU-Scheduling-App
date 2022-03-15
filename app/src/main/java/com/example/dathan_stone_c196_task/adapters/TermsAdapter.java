@@ -44,13 +44,8 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.TermHolder> 
     //binds the data
     @Override
     public void onBindViewHolder(@NonNull TermHolder holder, int position) {
-        System.out.println("Position: " + position);
         TermWithCourses details = termDetailsList.get(position);
-        //TermWithCourses currentTermDetails = termDetailsList.get(position);
-        //System.out.println("Position: " + position);
-        //holder.textViewTitle.setText(currentTermDetails.getTerm().getTitle());
         holder.textViewTitle.setText(details.term.getTitle());
-        System.out.println("Here: " + holder.textViewTitle.getText());
     }
 
     //Determines how many items you want to return.
@@ -58,13 +53,6 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.TermHolder> 
     public int getItemCount() {
         return termDetailsList.size();
     }
-
-    public void setTermList(List<Term> terms) {
-        this.termList = terms;
-        notifyDataSetChanged();
-    }
-
-
 
     class TermHolder extends RecyclerView.ViewHolder {
         private TextView textViewTitle;

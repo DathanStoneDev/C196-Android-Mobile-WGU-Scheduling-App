@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 import com.example.dathan_stone_c196_task.DAO.CourseDAO;
 import com.example.dathan_stone_c196_task.database.AppDatabase;
 import com.example.dathan_stone_c196_task.entities.Course;
+import com.example.dathan_stone_c196_task.entities.CourseWithAssessments;
 
 import java.util.List;
 
@@ -14,12 +15,13 @@ public class CourseRepository {
 
     private CourseDAO courseDAO;
     private LiveData<List<Course>> courses;
-    private LiveData<List<Course>> termCourses;
+    private LiveData<List<CourseWithAssessments>> courseDetails;
 
     public CourseRepository(Application application) {
         AppDatabase db = AppDatabase.getInstance(application);
         courseDAO = db.courseDAO();
         courses = courseDAO.findAllCourses();
+        courseDetails = courseDAO.findAllCourseDetails();
 
         try {
             Thread.sleep(1000);
@@ -29,6 +31,8 @@ public class CourseRepository {
     }
 
     public LiveData<List<Course>> getCourses() { return courses; }
+
+    public LiveData<List<CourseWithAssessments>> getCourseDetails() { return courseDetails; }
 
     public void addCourse(Course course) {
         AppDatabase.databaseWriteExecutor.execute(()-> {
@@ -48,10 +52,5 @@ public class CourseRepository {
         });
     }
 
-    public LiveData<List<Course>> findTermCourses(int id) {
-        AppDatabase.databaseWriteExecutor.execute(()-> {
-            termCourses = courseDAO.findTermCourses(id);
-        });
-        return termCourses;
-    }
+
 }

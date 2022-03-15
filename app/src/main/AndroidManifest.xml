@@ -13,6 +13,9 @@
             android:name=".activities.TermDetailsActivity"
             android:exported="true" />
         <activity
+            android:name=".activities.CourseDetailsActivity"
+            android:exported="true" />
+        <activity
             android:name=".activities.AddEditAssessmentsActivity"
             android:exported="true" />
         <activity
@@ -20,7 +23,7 @@
             android:exported="true"
             android:parentActivityName=".activities.TermsActivity" />
         <activity
-            android:name=".activities.AddEditCourseActivity"
+            android:name=".activities.AddCourseActivity"
             android:exported="true"
             android:parentActivityName=".activities.CoursesActivity" />
         <activity

@@ -8,11 +8,12 @@ import androidx.room.PrimaryKey;
 
 import com.example.dathan_stone_c196_task.utilities.DateConverter;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 
 @Entity(tableName = "assessments")
-public class Assessment {
+public class Assessment implements Serializable {
     @PrimaryKey(autoGenerate = true)
     @NonNull
     @ColumnInfo(name = "assessment_id")

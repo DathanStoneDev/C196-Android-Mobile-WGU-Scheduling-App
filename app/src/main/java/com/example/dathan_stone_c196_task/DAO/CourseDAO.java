@@ -6,10 +6,13 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
 import com.example.dathan_stone_c196_task.entities.Course;
+import com.example.dathan_stone_c196_task.entities.CourseWithAssessments;
 import com.example.dathan_stone_c196_task.entities.Instructor;
+import com.example.dathan_stone_c196_task.entities.TermWithCourses;
 
 import java.util.List;
 import java.util.Map;
@@ -32,7 +35,8 @@ public interface CourseDAO {
     @Query("SELECT * FROM courses")
     LiveData<List<Course>> findAllCourses();
 
-    @Query("SELECT * FROM courses WHERE term_id = :id")
-    LiveData<List<Course>> findTermCourses(int id);
+    @Transaction
+    @Query("SELECT * FROM courses")
+    LiveData<List<CourseWithAssessments>> findAllCourseDetails();
 
 }

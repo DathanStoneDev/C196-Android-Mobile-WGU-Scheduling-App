@@ -2,9 +2,7 @@ package com.example.dathan_stone_c196_task.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,7 +40,7 @@ public class TermDetailsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        termTitleInput = findViewById(R.id.term_course_details_title);
+        termTitleInput = findViewById(R.id.term_courses_details_title);
         termStartInput = findViewById(R.id.term_details_start_date);
         termEndInput = findViewById(R.id.term_details_end_date);
         coursesInTerm = new ArrayList<>(intent.getParcelableArrayListExtra(EXTRA_COURSES_IN_TERM));

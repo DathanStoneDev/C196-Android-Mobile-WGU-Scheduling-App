@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dathan_stone_c196_task.R;
 import com.example.dathan_stone_c196_task.entities.Course;
+import com.example.dathan_stone_c196_task.entities.CourseWithAssessments;
 import com.example.dathan_stone_c196_task.entities.Term;
 
 import java.util.ArrayList;
@@ -19,7 +20,17 @@ import java.util.List;
 public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CourseHolder> {
 
     private List<Course> courses = new ArrayList<>();
+    private List<CourseWithAssessments> courseDetailList = new ArrayList<>();
     private CoursesAdapter.OnItemClickListener listener;
+
+    public CoursesAdapter(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    public void setCourseDetailList(List<CourseWithAssessments> courseDetailList) {
+        this.courseDetailList = courseDetailList;
+        notifyDataSetChanged();
+    }
 
     @NonNull
     @Override
@@ -31,41 +42,42 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CourseHo
 
     @Override
     public void onBindViewHolder(@NonNull CourseHolder holder, int position) {
-        Course currentCourse = courses.get(position);
-        holder.textViewTitle.setText(currentCourse.getTitle());
+        CourseWithAssessments details = courseDetailList.get(position);
+        holder.textViewTitle.setText(details.course.getTitle());
     }
 
     @Override
     public int getItemCount() {
-        return courses.size();
-    }
-
-    public void setCourseList(List<Course> courses) {
-        this.courses = courses;
-        notifyDataSetChanged();
+        return courseDetailList.size();
     }
 
     class CourseHolder extends RecyclerView.ViewHolder {
 
         private TextView textViewTitle;
         private ImageButton detailView;
+        private ImageButton deleteView;
 
         public CourseHolder(@NonNull View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.course_title);
+            deleteView= itemView.findViewById(R.id.delete_course_button);
+            detailView = itemView.findViewById(R.id.course_details);
 
-            itemView.setOnClickListener(view -> {
+
+            deleteView.setOnClickListener(view -> {
                 int position = getAdapterPosition();
-                listener.OnItemClick(courses.get(position));
+                listener.deleteCourse(courseDetailList.get(position));
+            });
+
+            detailView.setOnClickListener(view -> {
+                int position = getAdapterPosition();
+                listener.detailsForCourse(courseDetailList.get(position));
             });
         }
     }
 
     public interface OnItemClickListener {
-        void OnItemClick(Course course);
-    }
-
-    public void setOnItemClickListener(CoursesAdapter.OnItemClickListener listener) {
-        this.listener = listener;
+        void deleteCourse(CourseWithAssessments delete);
+        void detailsForCourse(CourseWithAssessments details);
     }
 }

@@ -28,31 +28,13 @@ public class Course implements Serializable {
     private String note;
     @ColumnInfo(name = "term_id")
     private int termId;
-    @ColumnInfo(name = "assessment_id")
-    private int assessmentId;
 
-    @Ignore
-    public Course(String title, Date startDate, Date endDate, String status, String note) {
+    public Course(String title, Date startDate, Date endDate, String status, String note, int termId) {
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
         this.status = status;
         this.note = note;
-    }
-
-    @Ignore
-    public Course(String title, Date startDate, Date endDate, String status) {
-        this.title = title;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.status = status;
-    }
-
-    public Course(String title, Date startDate, Date endDate, String status, int termId) {
-        this.title = title;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.status = status;
         this.termId = termId;
     }
 
@@ -110,14 +92,6 @@ public class Course implements Serializable {
 
     public void setTermId(int termId) {
         this.termId = termId;
-    }
-
-    public int getAssessmentId() {
-        return assessmentId;
-    }
-
-    public void setAssessmentId(int assessmentId) {
-        this.assessmentId = assessmentId;
     }
 
     @Override
