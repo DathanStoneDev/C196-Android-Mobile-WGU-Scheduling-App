@@ -1,8 +1,12 @@
 package com.example.dathan_stone_c196_task.activities;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,6 +26,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.dathan_stone_c196_task.R;
 import com.example.dathan_stone_c196_task.entities.Term;
+import com.example.dathan_stone_c196_task.utilities.CourseAlertReceiver;
 import com.example.dathan_stone_c196_task.viewmodels.TermViewModel;
 
 import java.text.ParseException;
@@ -42,10 +47,15 @@ public class AddCourseActivity extends AppCompatActivity implements AdapterView.
     private EditText courseNotes;
     private ImageButton startDateButton;
     private ImageButton endDateButton;
+    private EditText instructorNameInput;
+    private EditText instructorPhoneInput;
+    private EditText instructorEmailInput;
     Calendar startDateCalendar;
     Calendar endDateCalendar;
     private TermViewModel termViewModel;
     private ArrayList<Term> allTerms = new ArrayList<>();
+    private AlarmManager alarmManager;
+    Calendar alarmCalander;
 
 
 
@@ -61,12 +71,13 @@ public class AddCourseActivity extends AppCompatActivity implements AdapterView.
         courseEnd = findViewById(R.id.course_end_date);
         startDateButton = findViewById(R.id.course_start_date_picker);
         endDateButton = findViewById(R.id.course_end_date_picker);
-        courseStatusSpinner = findViewById(R.id.course_type_spinner);
-        courseTermSpinner = findViewById(R.id.course_terms_spinner);
+        courseStatusSpinner = findViewById(R.id.course_status_spinner);
+        courseTermSpinner = findViewById(R.id.course_term_spinner);
         courseNotes = findViewById(R.id.course_notes);
+        instructorNameInput = findViewById(R.id.instructor_name_input);
+        instructorPhoneInput = findViewById(R.id.instructor_phone_number_input);
+        instructorEmailInput = findViewById(R.id.instructor_email_input);
 
-        //Data passed from the CourseActivity
-        Intent intent = getIntent();
 
 
         setTitle("Add New Course");
@@ -116,6 +127,8 @@ public class AddCourseActivity extends AppCompatActivity implements AdapterView.
             allTerms.addAll(terms);
             courseTermAdapter.notifyDataSetChanged();
         });
+
+        createNotificationChanel();
     }
 
    @Override
@@ -154,26 +167,64 @@ public class AddCourseActivity extends AppCompatActivity implements AdapterView.
     }
 
     private void saveCourse() throws ParseException {
+
+
         String title = courseTitleInput.getText().toString();
         String startDateToParse = courseStart.getText().toString();
         String endDateToParse = courseEnd.getText().toString();
         Date start = sdf.parse(startDateToParse);
+        Long longStart = start.getTime();
         Date end = sdf.parse(endDateToParse);
         String status = courseStatusSpinner.getSelectedItem().toString();
         String note = courseNotes.getText().toString();
-        Term term = (Term) courseTermSpinner.getSelectedItem();
-        int termId = term.getId();
+        String instructorName = instructorNameInput.getText().toString();
+        String instructorPhone = instructorPhoneInput.getText().toString();
+        String instructorEmail = instructorEmailInput.getText().toString();
+        String courseStatus = courseStatusSpinner.getSelectedItem().toString();
+        int termId = ((Term) courseTermSpinner.getSelectedItem()).getId();
+        int courseAlarmId = termId;
+
+        alarmCalander = Calendar.getInstance();
+        alarmCalander.setTime(start);
+        alarmCalander.set(Calendar.HOUR_OF_DAY, 20);
+        alarmCalander.set(Calendar.MINUTE, 39);
+
+
+        setAlert(courseAlarmId);
 
         Intent data = new Intent();
 
         data.putExtra(CourseDetailsActivity.EXTRA_COURSE_TITLE, title);
-        data.putExtra(CourseDetailsActivity.EXTRA_COURSE_START_DATE, start);
+        data.putExtra(CourseDetailsActivity.EXTRA_COURSE_START_DATE, longStart);
         data.putExtra(CourseDetailsActivity.EXTRA_COURSE_END_DATE, end);
         data.putExtra(CourseDetailsActivity.EXTRA_COURSE_STATUS, status);
         data.putExtra(CourseDetailsActivity.EXTRA_COURSE_NOTES, note);
         data.putExtra(CourseDetailsActivity.EXTRA_COURSE_TERM_ID, termId);
+        data.putExtra(CourseDetailsActivity.EXTRA_COURSE_INSTRUCTOR_NAME, instructorName);
+        data.putExtra(CourseDetailsActivity.EXTRA_COURSE_INSTRUCTOR_PHONE, instructorPhone);
+        data.putExtra(CourseDetailsActivity.EXTRA_COURSE_INSTRUCTOR_EMAIL, instructorEmail);
+        data.putExtra(CourseDetailsActivity.EXTRA_COURSE_TERM_ID, termId);
+        data.putExtra(CourseDetailsActivity.EXTRA_COURSE_STATUS, courseStatus);
+
 
         setResult(RESULT_OK, data);
+        System.out.println("Alarm: " + alarmCalander.getTimeInMillis());
         finish();
+        System.out.println("Alarm: " + alarmCalander.getTimeInMillis());
+    }
+
+    private void createNotificationChanel() {
+        NotificationChannel channel = new NotificationChannel("course_channel", "course_channel", NotificationManager.IMPORTANCE_HIGH);
+        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+        notificationManager.createNotificationChannel(channel);
+    }
+
+    //Make Request Code Unique
+    private void setAlert(int courseAlarmId) {
+        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, CourseAlertReceiver.class);
+        intent.putExtra(CourseDetailsActivity.EXTRA_COURSE_ALARM_ID, courseAlarmId);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, courseAlarmId, intent, 0);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmCalander.getTimeInMillis(), pendingIntent);
     }
 }

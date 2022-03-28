@@ -28,14 +28,26 @@ public class Course implements Serializable {
     private String note;
     @ColumnInfo(name = "term_id")
     private int termId;
+    @ColumnInfo(name = "instructor_name")
+    private String instructorName;
+    @ColumnInfo(name = "instructor_phone_number")
+    private String instructorPhoneNumber;
+    @ColumnInfo(name = "instructor_email")
+    private String instructorEmail;
+    @ColumnInfo
+    private int courseAlarmId;
 
-    public Course(String title, Date startDate, Date endDate, String status, String note, int termId) {
+    public Course(String title, Date startDate, Date endDate, String status, String note, int termId, String instructorName, String instructorPhoneNumber, String instructorEmail, int courseAlarmId) {
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
         this.status = status;
         this.note = note;
         this.termId = termId;
+        this.instructorName = instructorName;
+        this.instructorPhoneNumber = instructorPhoneNumber;
+        this.instructorEmail = instructorEmail;
+        this.courseAlarmId = courseAlarmId;
     }
 
     public int getCourseId() {
@@ -92,6 +104,38 @@ public class Course implements Serializable {
 
     public void setTermId(int termId) {
         this.termId = termId;
+    }
+
+    public String getInstructorName() {
+        return instructorName;
+    }
+
+    public void setInstructorName(String instructorName) {
+        this.instructorName = instructorName;
+    }
+
+    public String getInstructorPhoneNumber() {
+        return instructorPhoneNumber;
+    }
+
+    public void setInstructorPhoneNumber(String instructorPhoneNumber) {
+        this.instructorPhoneNumber = instructorPhoneNumber;
+    }
+
+    public String getInstructorEmail() {
+        return instructorEmail;
+    }
+
+    public void setInstructorEmail(String instructorEmail) {
+        this.instructorEmail = instructorEmail;
+    }
+
+    public int getCourseAlarmId() {
+        return courseAlarmId;
+    }
+
+    public void setCourseAlarmId(int courseAlarmId) {
+        this.courseAlarmId = courseAlarmId;
     }
 
     @Override

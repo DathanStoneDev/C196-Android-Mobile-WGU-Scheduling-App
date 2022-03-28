@@ -11,11 +11,8 @@ import androidx.room.Update;
 
 import com.example.dathan_stone_c196_task.entities.Course;
 import com.example.dathan_stone_c196_task.entities.CourseWithAssessments;
-import com.example.dathan_stone_c196_task.entities.Instructor;
-import com.example.dathan_stone_c196_task.entities.TermWithCourses;
 
 import java.util.List;
-import java.util.Map;
 
 @Dao
 public interface CourseDAO {

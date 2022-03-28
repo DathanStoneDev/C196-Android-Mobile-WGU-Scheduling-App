@@ -35,6 +35,7 @@ public class AddEditAssessmentsActivity extends AppCompatActivity implements Ada
     public static final String EXTRA_ASSESSMENT_TYPE = "com.example.dathan_stone_c196_task.activities.EXTRA_ASSESSMENT_TYPE";
     public static final String EXTRA_ASSESSMENT_START = "com.example.dathan_stone_c196_task.activities.EXTRA_ASSESSMENT_START";
     public static final String EXTRA_ASSESSMENT_COURSE_ID = "com.example.dathan_stone_c196_task.activities.EXTRA_ASSESSMENT_COURSE_ID";
+    public static final String EXTRA_ASSESSMENT_ALARM_ID = "com.example.dathan_stone_c196_task.activities.EXTRA_ASSESSMENT_ALARM_ID";
 
     private EditText assessmentTitleInput;
     private Spinner assessmentTypeSpinner;

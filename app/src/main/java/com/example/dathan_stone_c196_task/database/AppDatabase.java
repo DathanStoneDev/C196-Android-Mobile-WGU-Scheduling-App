@@ -12,7 +12,6 @@ import com.example.dathan_stone_c196_task.DAO.CourseDAO;
 import com.example.dathan_stone_c196_task.DAO.TermDAO;
 import com.example.dathan_stone_c196_task.entities.Assessment;
 import com.example.dathan_stone_c196_task.entities.Course;
-import com.example.dathan_stone_c196_task.entities.Instructor;
 import com.example.dathan_stone_c196_task.entities.Term;
 import com.example.dathan_stone_c196_task.utilities.DateConverter;
 
@@ -22,7 +21,7 @@ import java.util.concurrent.Executors;
 /**
  * Declares the Database and adds the Course, Instructor, Term and Assessment entities to the database.
  */
-@Database(entities = {Course.class, Instructor.class, Term.class, Assessment.class}, version = 19)
+@Database(entities = {Course.class, Term.class, Assessment.class}, version = 22)
 @TypeConverters({DateConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
 
