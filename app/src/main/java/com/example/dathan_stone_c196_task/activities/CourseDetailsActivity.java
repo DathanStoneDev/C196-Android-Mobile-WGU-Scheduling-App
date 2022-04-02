@@ -2,6 +2,8 @@ package com.example.dathan_stone_c196_task.activities;
 
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -83,6 +85,8 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_details);
         setTitle("Course Details");
+
+        createNotificationChanel();
 
         Intent intent = getIntent();
 
@@ -243,9 +247,7 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
 
         alarmCalander = Calendar.getInstance();
         alarmCalander.setTime(start);
-        alarmCalander.set(Calendar.HOUR_OF_DAY, 20);
-        alarmCalander.set(Calendar.MINUTE, 42);
-
+        alarmCalander.set(Calendar.HOUR_OF_DAY, 8);
 
         setAlert(courseAlarmId);
 
@@ -269,6 +271,13 @@ public class CourseDetailsActivity extends AppCompatActivity implements AdapterV
 
         setResult(RESULT_OK, data);
         finish();
+    }
+
+    //Creates the notification channel to connect to the CourseAlertReceiver Notification builder
+    private void createNotificationChanel() {
+        NotificationChannel channel = new NotificationChannel("course_channel", "course_channel", NotificationManager.IMPORTANCE_HIGH);
+        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+        notificationManager.createNotificationChannel(channel);
     }
 
     private void setAlert(int courseAlarmId) {

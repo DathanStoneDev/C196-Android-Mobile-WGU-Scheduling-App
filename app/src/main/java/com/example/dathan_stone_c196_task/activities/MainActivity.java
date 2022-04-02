@@ -4,39 +4,41 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.widget.ImageButton;
 
 import com.example.dathan_stone_c196_task.R;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ImageButton termListButton;
+    private ImageButton courseListButton;
+    private ImageButton assessmentsListButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-    }
-
-    public void goToActivity(View view) {
+        termListButton = findViewById(R.id.termListButton);
+        courseListButton = findViewById(R.id.courseListButton);
+        assessmentsListButton = findViewById(R.id.assessmentsListButton);
 
         Intent intent = new Intent();
 
-        switch (view.getId()) {
-            case  R.id.termListButton:
-                intent.setClass(view.getContext(), TermsActivity.class);
-                startActivity(intent);
-                return;
+        termListButton.setOnClickListener(view -> {
+            intent.setClass(view.getContext(), TermsActivity.class);
+            startActivity(intent);
+        });
 
-            case R.id.courseListButton:
-                intent.setClass(view.getContext(), CoursesActivity.class);
-                startActivity(intent);
-                return;
+        courseListButton.setOnClickListener(view -> {
+            intent.setClass(view.getContext(), CoursesActivity.class);
+            startActivity(intent);
+        });
 
-            case R.id.assessmentListButton:
-                intent.setClass(view.getContext(), AssessmentsActivity.class);
-                startActivity(intent);
-                return;
-            default:
-        }
+        assessmentsListButton.setOnClickListener(view -> {
+            intent.setClass(view.getContext(), AssessmentsActivity.class);
+            startActivity(intent);
+        });
+
     }
 }

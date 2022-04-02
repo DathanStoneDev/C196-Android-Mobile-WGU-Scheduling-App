@@ -7,6 +7,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -56,9 +57,6 @@ public class AddCourseActivity extends AppCompatActivity implements AdapterView.
     private ArrayList<Term> allTerms = new ArrayList<>();
     private AlarmManager alarmManager;
     Calendar alarmCalander;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,6 +129,7 @@ public class AddCourseActivity extends AppCompatActivity implements AdapterView.
         createNotificationChanel();
     }
 
+    //Not used.
    @Override
     public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
         String selectedType = parent.getItemAtPosition(i).toString();
@@ -139,11 +138,13 @@ public class AddCourseActivity extends AppCompatActivity implements AdapterView.
 
     }
 
+    //Not used
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
 
+    //Creates an Options Menu.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -151,6 +152,7 @@ public class AddCourseActivity extends AppCompatActivity implements AdapterView.
         return true;
     }
 
+    //Switch statement to determine what action to perform if a menu item is clicked.
    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -166,8 +168,8 @@ public class AddCourseActivity extends AppCompatActivity implements AdapterView.
         }
     }
 
+    //Saves a new course and sends to the CourseActivity ActivityResultLauncher.
     private void saveCourse() throws ParseException {
-
 
         String title = courseTitleInput.getText().toString();
         String startDateToParse = courseStart.getText().toString();
@@ -177,6 +179,7 @@ public class AddCourseActivity extends AppCompatActivity implements AdapterView.
         Date end = sdf.parse(endDateToParse);
         String status = courseStatusSpinner.getSelectedItem().toString();
         String note = courseNotes.getText().toString();
+        String email = "developer.stone@outlook.com";
         String instructorName = instructorNameInput.getText().toString();
         String instructorPhone = instructorPhoneInput.getText().toString();
         String instructorEmail = instructorEmailInput.getText().toString();
@@ -184,16 +187,14 @@ public class AddCourseActivity extends AppCompatActivity implements AdapterView.
         int termId = ((Term) courseTermSpinner.getSelectedItem()).getId();
         int courseAlarmId = termId;
 
+        //Sets an alarm automatically upon saving.
         alarmCalander = Calendar.getInstance();
         alarmCalander.setTime(start);
-        alarmCalander.set(Calendar.HOUR_OF_DAY, 20);
-        alarmCalander.set(Calendar.MINUTE, 39);
-
-
+        alarmCalander.set(Calendar.HOUR_OF_DAY, 8);
         setAlert(courseAlarmId);
 
+        //Creates the intent and adds the data that will be sent over to CourseActivity.
         Intent data = new Intent();
-
         data.putExtra(CourseDetailsActivity.EXTRA_COURSE_TITLE, title);
         data.putExtra(CourseDetailsActivity.EXTRA_COURSE_START_DATE, longStart);
         data.putExtra(CourseDetailsActivity.EXTRA_COURSE_END_DATE, end);
@@ -205,26 +206,44 @@ public class AddCourseActivity extends AppCompatActivity implements AdapterView.
         data.putExtra(CourseDetailsActivity.EXTRA_COURSE_INSTRUCTOR_EMAIL, instructorEmail);
         data.putExtra(CourseDetailsActivity.EXTRA_COURSE_TERM_ID, termId);
         data.putExtra(CourseDetailsActivity.EXTRA_COURSE_STATUS, courseStatus);
-
-
         setResult(RESULT_OK, data);
-        System.out.println("Alarm: " + alarmCalander.getTimeInMillis());
+
+        //send email of notes
+        sendNotesToEmail(note, email);
+
         finish();
-        System.out.println("Alarm: " + alarmCalander.getTimeInMillis());
     }
 
+    //Creates the notification channel to connect to the CourseAlertReceiver Notification builder
     private void createNotificationChanel() {
         NotificationChannel channel = new NotificationChannel("course_channel", "course_channel", NotificationManager.IMPORTANCE_HIGH);
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
         notificationManager.createNotificationChannel(channel);
     }
 
-    //Make Request Code Unique
+    //Sets an alert for the course start date
     private void setAlert(int courseAlarmId) {
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, CourseAlertReceiver.class);
         intent.putExtra(CourseDetailsActivity.EXTRA_COURSE_ALARM_ID, courseAlarmId);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, courseAlarmId, intent, 0);
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmCalander.getTimeInMillis(), pendingIntent);
+    }
+
+    //Sends notes in an email
+    private void sendNotesToEmail(String notes, String email) {
+        Intent emailInfo = new Intent(Intent.ACTION_SEND);
+        emailInfo.setData(Uri.parse("mailto:"));
+        emailInfo.setType("text/plain");
+        emailInfo.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
+        emailInfo.putExtra(Intent.EXTRA_SUBJECT, "Class Notes");
+        emailInfo.putExtra(Intent.EXTRA_TEXT, notes);
+
+        try {
+            startActivity(Intent.createChooser(emailInfo, "Send Notes to..."));
+            finish();
+        } catch (android.content.ActivityNotFoundException ex) {
+
+        }
     }
 }

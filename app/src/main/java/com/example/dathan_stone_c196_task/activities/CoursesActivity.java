@@ -53,9 +53,8 @@ public class CoursesActivity extends AppCompatActivity {
 
                 Course course = new Course(title, startDate, endDate, status, notes, termId, instructorName, instructorPhone, instructorEmail, courseAlarmId);
                 courseViewModel.insert(course);
-                System.out.println(course.getStartDate().toString());
 
-            } else if (data.hasExtra(CourseDetailsActivity.EXTRA_COURSE_ID)) {
+            } else if (code == RESULT_OK && data.hasExtra(CourseDetailsActivity.EXTRA_COURSE_ID)) {
                 int courseId = data.getIntExtra(CourseDetailsActivity.EXTRA_COURSE_ID, -1);
                 String title = data.getStringExtra(CourseDetailsActivity.EXTRA_COURSE_TITLE);
                 Date startDate = new Date (data.getLongExtra(CourseDetailsActivity.EXTRA_COURSE_START_DATE, -1));
@@ -111,6 +110,7 @@ public class CoursesActivity extends AppCompatActivity {
                 intent.putExtra(CourseDetailsActivity.EXTRA_COURSE_INSTRUCTOR_NAME, details.course.getInstructorName());
                 intent.putExtra(CourseDetailsActivity.EXTRA_COURSE_INSTRUCTOR_PHONE, details.course.getInstructorPhoneNumber());
                 intent.putExtra(CourseDetailsActivity.EXTRA_COURSE_INSTRUCTOR_EMAIL, details.course.getInstructorEmail());
+                intent.putExtra(CourseDetailsActivity.EXTRA_COURSE_ALARM_ID, details.course.getCourseAlarmId());
                 List courseAssessments = details.getAssessments();
                 intent.putParcelableArrayListExtra(CourseDetailsActivity.EXTRA_ASSESSMENTS_IN_COURSE, (ArrayList<? extends Parcelable>) courseAssessments);
 
