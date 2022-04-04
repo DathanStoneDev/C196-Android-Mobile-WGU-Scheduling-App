@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
         courseListButton = findViewById(R.id.courseListButton);
         assessmentsListButton = findViewById(R.id.assessmentsListButton);
 
+        setTitle("School Scheduler Pro");
+
         Intent intent = new Intent();
 
         termListButton.setOnClickListener(view -> {

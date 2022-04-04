@@ -35,9 +35,11 @@ public class Course implements Serializable {
     @ColumnInfo(name = "instructor_email")
     private String instructorEmail;
     @ColumnInfo
-    private int courseAlarmId;
+    private int startCourseAlarmId;
+    @ColumnInfo
+    private int endCourseAlarmId;
 
-    public Course(String title, Date startDate, Date endDate, String status, String note, int termId, String instructorName, String instructorPhoneNumber, String instructorEmail, int courseAlarmId) {
+    public Course(String title, Date startDate, Date endDate, String status, String note, int termId, String instructorName, String instructorPhoneNumber, String instructorEmail, int startCourseAlarmId, int endCourseAlarmId) {
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -47,7 +49,8 @@ public class Course implements Serializable {
         this.instructorName = instructorName;
         this.instructorPhoneNumber = instructorPhoneNumber;
         this.instructorEmail = instructorEmail;
-        this.courseAlarmId = courseAlarmId;
+        this.startCourseAlarmId = startCourseAlarmId;
+        this.endCourseAlarmId = endCourseAlarmId;
     }
 
     public int getCourseId() {
@@ -130,12 +133,20 @@ public class Course implements Serializable {
         this.instructorEmail = instructorEmail;
     }
 
-    public int getCourseAlarmId() {
-        return courseAlarmId;
+    public int getStartCourseAlarmId() {
+        return startCourseAlarmId;
     }
 
-    public void setCourseAlarmId(int courseAlarmId) {
-        this.courseAlarmId = courseAlarmId;
+    public void setStartCourseAlarmId(int startCourseAlarmId) {
+        this.startCourseAlarmId = startCourseAlarmId;
+    }
+
+    public int getEndCourseAlarmId() {
+        return endCourseAlarmId;
+    }
+
+    public void setEndCourseAlarmId(int endCourseAlarmId) {
+        this.endCourseAlarmId = endCourseAlarmId;
     }
 
     @Override

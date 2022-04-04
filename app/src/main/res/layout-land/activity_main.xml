@@ -8,70 +8,68 @@
 
     <ImageButton
         android:id="@+id/assessmentsListButton"
-        android:layout_width="130dp"
+        android:layout_width="117dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="77dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView14"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/courseListButton"
+        app:layout_constraintTop_toBottomOf="@+id/textView13"
         app:srcCompat="@drawable/ic_action_assessment_icon"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/courseListButton"
-        android:layout_width="130dp"
+        android:layout_width="117dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="90dp"
-        app:layout_constraintBottom_toTopOf="@+id/assessmentsListButton"
+        app:layout_constraintBottom_toTopOf="@+id/textView13"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/termListButton"
+        app:layout_constraintTop_toBottomOf="@+id/textView12"
         app:srcCompat="@drawable/ic_action_class_icon"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/termListButton"
-        android:layout_width="130dp"
+        android:layout_width="117dp"
         android:layout_height="0dp"
-        android:layout_marginTop="77dp"
-        android:layout_marginBottom="90dp"
-        app:layout_constraintBottom_toTopOf="@+id/courseListButton"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView12"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_action_term_icon"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
+        android:layout_marginBottom="2dp"
         android:text="Terms"
+        app:layout_constraintBottom_toTopOf="@+id/courseListButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/termListButton" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="7dp"
         android:text="Courses"
+        app:layout_constraintBottom_toTopOf="@+id/assessmentsListButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/courseListButton" />
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="61dp"
+        android:layout_marginBottom="24dp"
         android:text="Assessments"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/assessmentsListButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

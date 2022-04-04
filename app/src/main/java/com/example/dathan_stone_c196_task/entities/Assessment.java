@@ -24,14 +24,23 @@ public class Assessment implements Serializable {
     private String type;
     @ColumnInfo(name = "assessment_start_date")
     private Date startDate;
+    @ColumnInfo(name = "assessment_end_date")
+    private Date endDate;
     @ColumnInfo(name = "course_id")
     private int courseId;
+    @ColumnInfo
+    private int startAlarmId;
+    @ColumnInfo
+    private int endAlarmId;
 
-    public Assessment(String assessmentTitle, String type, Date startDate, int courseId) {
+    public Assessment(String assessmentTitle, String type, Date startDate, Date endDate, int courseId, int startAlarmId, int endAlarmId) {
         this.assessmentTitle = assessmentTitle;
         this.type = type;
         this.startDate = startDate;
+        this.endDate = endDate;
         this.courseId = courseId;
+        this.startAlarmId = startAlarmId;
+        this.endAlarmId = endAlarmId;
     }
 
     public int getId() {
@@ -66,11 +75,35 @@ public class Assessment implements Serializable {
         this.startDate = startDate;
     }
 
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
     public int getCourseId() {
         return courseId;
     }
 
     public void setCourseId(int courseId) {
         this.courseId = courseId;
+    }
+
+    public int getStartAlarmId() {
+        return startAlarmId;
+    }
+
+    public void setStartAlarmId(int startAlarmId) {
+        this.startAlarmId = startAlarmId;
+    }
+
+    public int getEndAlarmId() {
+        return endAlarmId;
+    }
+
+    public void setEndAlarmId(int endAlarmId) {
+        this.endAlarmId = endAlarmId;
     }
 }

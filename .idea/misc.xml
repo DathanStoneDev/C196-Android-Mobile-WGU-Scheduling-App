@@ -10,14 +10,23 @@
         <entry key="..\:/Users/dston/AndroidStudioProjects/Dathan_Stone_C196_Task/app/src/main/res/drawable/ic_channel_background.xml" value="0.37864583333333335" />
         <entry key="..\:/Users/dston/AndroidStudioProjects/Dathan_Stone_C196_Task/app/src/main/res/drawable/ic_channel_foreground.xml" value="0.37864583333333335" />
         <entry key="..\:/Users/dston/AndroidStudioProjects/Dathan_Stone_C196_Task/app/src/main/res/drawable/ic_launcher_background.xml" value="0.21666666666666667" />
-        <entry key="..\:/Users/dston/AndroidStudioProjects/Dathan_Stone_C196_Task/app/src/main/res/layout/activity_add_course.xml" value="0.5" />
-        <entry key="..\:/Users/dston/AndroidStudioProjects/Dathan_Stone_C196_Task/app/src/main/res/layout/activity_add_edit_assessments.xml" value="0.1" />
+        <entry key="..\:/Users/dston/AndroidStudioProjects/Dathan_Stone_C196_Task/app/src/main/res/layout-land/activity_add_course.xml" value="0.5" />
+        <entry key="..\:/Users/dston/AndroidStudioProjects/Dathan_Stone_C196_Task/app/src/main/res/layout-land/activity_add_term.xml" value="0.4656084656084656" />
+        <entry key="..\:/Users/dston/AndroidStudioProjects/Dathan_Stone_C196_Task/app/src/main/res/layout-land/activity_assessments.xml" value="0.4656084656084656" />
+        <entry key="..\:/Users/dston/AndroidStudioProjects/Dathan_Stone_C196_Task/app/src/main/res/layout-land/activity_course_details.xml" value="0.4656084656084656" />
+        <entry key="..\:/Users/dston/AndroidStudioProjects/Dathan_Stone_C196_Task/app/src/main/res/layout-land/activity_main.xml" value="0.4656084656084656" />
+        <entry key="..\:/Users/dston/AndroidStudioProjects/Dathan_Stone_C196_Task/app/src/main/res/layout-land/activity_placeholder.xml" value="0.5" />
+        <entry key="..\:/Users/dston/AndroidStudioProjects/Dathan_Stone_C196_Task/app/src/main/res/layout-land/activity_term_details.xml" value="0.5" />
+        <entry key="..\:/Users/dston/AndroidStudioProjects/Dathan_Stone_C196_Task/app/src/main/res/layout/activity_add_course.xml" value="0.48448687350835323" />
+        <entry key="..\:/Users/dston/AndroidStudioProjects/Dathan_Stone_C196_Task/app/src/main/res/layout/activity_add_edit_assessments.xml" value="0.25" />
         <entry key="..\:/Users/dston/AndroidStudioProjects/Dathan_Stone_C196_Task/app/src/main/res/layout/activity_add_edit_instrcutors.xml" value="0.3625" />
         <entry key="..\:/Users/dston/AndroidStudioProjects/Dathan_Stone_C196_Task/app/src/main/res/layout/activity_add_term.xml" value="0.33" />
         <entry key="..\:/Users/dston/AndroidStudioProjects/Dathan_Stone_C196_Task/app/src/main/res/layout/activity_assessments.xml" value="0.3625" />
         <entry key="..\:/Users/dston/AndroidStudioProjects/Dathan_Stone_C196_Task/app/src/main/res/layout/activity_course_details.xml" value="0.5" />
         <entry key="..\:/Users/dston/AndroidStudioProjects/Dathan_Stone_C196_Task/app/src/main/res/layout/activity_courses.xml" value="0.3484375" />
+        <entry key="..\:/Users/dston/AndroidStudioProjects/Dathan_Stone_C196_Task/app/src/main/res/layout/activity_edit_add_assessments.xml" value="0.55" />
         <entry key="..\:/Users/dston/AndroidStudioProjects/Dathan_Stone_C196_Task/app/src/main/res/layout/activity_main.xml" value="0.3625" />
+        <entry key="..\:/Users/dston/AndroidStudioProjects/Dathan_Stone_C196_Task/app/src/main/res/layout/activity_placeholder.xml" value="0.55" />
         <entry key="..\:/Users/dston/AndroidStudioProjects/Dathan_Stone_C196_Task/app/src/main/res/layout/activity_term_details.xml" value="0.33" />
         <entry key="..\:/Users/dston/AndroidStudioProjects/Dathan_Stone_C196_Task/app/src/main/res/layout/activity_terms.xml" value="0.33" />
         <entry key="..\:/Users/dston/AndroidStudioProjects/Dathan_Stone_C196_Task/app/src/main/res/layout/assessment_in_course_item.xml" value="0.5619791666666667" />

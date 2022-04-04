@@ -66,6 +66,8 @@ public class TermsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_terms);
 
+        setTitle("Terms");
+
         RecyclerView recyclerView = findViewById(R.id.terms_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

@@ -35,6 +35,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 
 public class AddCourseActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -56,7 +57,8 @@ public class AddCourseActivity extends AppCompatActivity implements AdapterView.
     private TermViewModel termViewModel;
     private ArrayList<Term> allTerms = new ArrayList<>();
     private AlarmManager alarmManager;
-    Calendar alarmCalander;
+    Calendar startAlarmCalender;
+    Calendar endAlarmCalender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,19 +181,28 @@ public class AddCourseActivity extends AppCompatActivity implements AdapterView.
         Date end = sdf.parse(endDateToParse);
         String status = courseStatusSpinner.getSelectedItem().toString();
         String note = courseNotes.getText().toString();
-        String email = "developer.stone@outlook.com";
         String instructorName = instructorNameInput.getText().toString();
         String instructorPhone = instructorPhoneInput.getText().toString();
         String instructorEmail = instructorEmailInput.getText().toString();
         String courseStatus = courseStatusSpinner.getSelectedItem().toString();
         int termId = ((Term) courseTermSpinner.getSelectedItem()).getId();
-        int courseAlarmId = termId;
+        //Make Random
+        Random randomId = new Random();
+        int startCourseAlarmId = randomId.nextInt(50000);
+        int endCourseAlarmId = randomId.nextInt(50000);
 
         //Sets an alarm automatically upon saving.
-        alarmCalander = Calendar.getInstance();
-        alarmCalander.setTime(start);
-        alarmCalander.set(Calendar.HOUR_OF_DAY, 8);
-        setAlert(courseAlarmId);
+        startAlarmCalender = Calendar.getInstance();
+        startAlarmCalender.setTime(start);
+        startAlarmCalender.set(Calendar.HOUR_OF_DAY, 17);
+        startAlarmCalender.set(Calendar.MINUTE, 31);
+        setStartAlert(startCourseAlarmId);
+
+        endAlarmCalender = Calendar.getInstance();
+        endAlarmCalender.setTime(end);
+        endAlarmCalender.set(Calendar.HOUR_OF_DAY, 17);
+        endAlarmCalender.set(Calendar.MINUTE, 32);
+        setEndAlert(endCourseAlarmId);
 
         //Creates the intent and adds the data that will be sent over to CourseActivity.
         Intent data = new Intent();
@@ -206,11 +217,14 @@ public class AddCourseActivity extends AppCompatActivity implements AdapterView.
         data.putExtra(CourseDetailsActivity.EXTRA_COURSE_INSTRUCTOR_EMAIL, instructorEmail);
         data.putExtra(CourseDetailsActivity.EXTRA_COURSE_TERM_ID, termId);
         data.putExtra(CourseDetailsActivity.EXTRA_COURSE_STATUS, courseStatus);
+        data.putExtra(CourseDetailsActivity.EXTRA_START_COURSE_ALARM_ID, startCourseAlarmId);
+        data.putExtra(CourseDetailsActivity.EXTRA_END_COURSE_ALARM_ID, endCourseAlarmId);
         setResult(RESULT_OK, data);
 
         //send email of notes
-        sendNotesToEmail(note, email);
-
+        if (!note.trim().isEmpty()) {
+            sendNotesToEmail(note, title);
+        }
         finish();
     }
 
@@ -222,21 +236,33 @@ public class AddCourseActivity extends AppCompatActivity implements AdapterView.
     }
 
     //Sets an alert for the course start date
-    private void setAlert(int courseAlarmId) {
+    private void setStartAlert(int startCourseAlarmId) {
+
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, CourseAlertReceiver.class);
-        intent.putExtra(CourseDetailsActivity.EXTRA_COURSE_ALARM_ID, courseAlarmId);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, courseAlarmId, intent, 0);
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmCalander.getTimeInMillis(), pendingIntent);
+        intent.putExtra(CourseDetailsActivity.EXTRA_START_COURSE_ALARM_ID, startCourseAlarmId);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, startCourseAlarmId, intent, 0);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, startAlarmCalender.getTimeInMillis(), pendingIntent);
+        System.out.println(startCourseAlarmId);
+    }
+
+    //Sets an alert for course end date.
+    private void setEndAlert(int endCourseAlarmId) {
+        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, CourseAlertReceiver.class);
+        intent.putExtra(CourseDetailsActivity.EXTRA_END_COURSE_ALARM_ID, endCourseAlarmId);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, endCourseAlarmId, intent, 0);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, endAlarmCalender.getTimeInMillis(), pendingIntent);
+        System.out.println(endCourseAlarmId);
     }
 
     //Sends notes in an email
-    private void sendNotesToEmail(String notes, String email) {
+    private void sendNotesToEmail(String notes, String title) {
         Intent emailInfo = new Intent(Intent.ACTION_SEND);
         emailInfo.setData(Uri.parse("mailto:"));
         emailInfo.setType("text/plain");
-        emailInfo.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
-        emailInfo.putExtra(Intent.EXTRA_SUBJECT, "Class Notes");
+        emailInfo.putExtra(Intent.EXTRA_EMAIL, new String[]{""});
+        emailInfo.putExtra(Intent.EXTRA_SUBJECT, "Class Notes: " + title);
         emailInfo.putExtra(Intent.EXTRA_TEXT, notes);
 
         try {

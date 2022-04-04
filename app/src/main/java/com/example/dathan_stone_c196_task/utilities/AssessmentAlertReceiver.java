@@ -12,10 +12,9 @@ import com.example.dathan_stone_c196_task.R;
 import com.example.dathan_stone_c196_task.activities.AddEditAssessmentsActivity;
 import com.example.dathan_stone_c196_task.activities.AssessmentsActivity;
 
-
 public class AssessmentAlertReceiver extends BroadcastReceiver {
 
-    public static final String ASSESSMENT_ALARM_TITLE = "com.example.dathan_stone_c196_task.utilities.ALARM_TITLE";
+    public static final String ASSESSMENT_ALARM_TITLE = "com.example.dathan_stone_c196_task.utilities.ASSESSMENT_ALARM_TITLE";
 
 
     @Override
@@ -23,21 +22,41 @@ public class AssessmentAlertReceiver extends BroadcastReceiver {
 
         Intent i = new Intent(context, AssessmentsActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, intent.getIntExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_ALARM_ID, -1), i, 0);
 
-        String title = intent.getStringExtra(ASSESSMENT_ALARM_TITLE);
+        int startAlarmId = intent.getIntExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_START_ALARM_ID, -1);
+        int endAlarmId = intent.getIntExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_END_ALARM_ID, -1);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context.getApplicationContext(), "assessment_channel")
-                .setContentTitle(title)
-                .setSmallIcon(R.drawable.ic_action_edit)
-                .setContentText("here you go")
-                .setAutoCancel(true)
-                .setDefaults(NotificationCompat.DEFAULT_ALL)
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setContentIntent(pendingIntent);
+        if (startAlarmId > -1) {
+            PendingIntent pendingIntent1 = PendingIntent.getActivity(context, intent.getIntExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_START_ALARM_ID, -1), i, 0);
+            String title = intent.getStringExtra(ASSESSMENT_ALARM_TITLE);
 
-        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
-        notificationManagerCompat.notify(2, builder.build());
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(context.getApplicationContext(), "assess")
+                    .setContentTitle(title)
+                    .setSmallIcon(R.drawable.ic_action_edit)
+                    .setContentText("Assessment Start Date")
+                    .setAutoCancel(true)
+                    .setDefaults(NotificationCompat.DEFAULT_ALL)
+                    .setContentIntent(pendingIntent1);
 
+            NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
+            notificationManagerCompat.notify(123, builder.build());
+        } else if (endAlarmId > -1) {
+
+            PendingIntent pendingIntent2 = PendingIntent.getActivity(context, intent.getIntExtra(AddEditAssessmentsActivity.EXTRA_ASSESSMENT_END_ALARM_ID, -1), i, 0);
+            String title = intent.getStringExtra(ASSESSMENT_ALARM_TITLE);
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(context.getApplicationContext(), "assess")
+                    .setContentTitle(title)
+                    .setSmallIcon(R.drawable.ic_action_edit)
+                    .setContentText("Assessment End Date")
+                    .setAutoCancel(true)
+                    .setDefaults(NotificationCompat.DEFAULT_ALL)
+                    .setContentIntent(pendingIntent2);
+
+            NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
+            notificationManagerCompat.notify(123, builder.build());
+        }
     }
+
+
+
 }

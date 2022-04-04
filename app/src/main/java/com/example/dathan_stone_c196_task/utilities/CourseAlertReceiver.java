@@ -22,21 +22,39 @@ public class CourseAlertReceiver extends BroadcastReceiver {
 
         Intent i = new Intent(context, CoursesActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, intent.getIntExtra(CourseDetailsActivity.EXTRA_COURSE_ALARM_ID, -1), i, 0);
 
-        String title = intent.getStringExtra(ALARM_TITLE);
+        int startAlarmId = intent.getIntExtra(CourseDetailsActivity.EXTRA_START_COURSE_ALARM_ID, -1);
+        int endAlarmId = intent.getIntExtra(CourseDetailsActivity.EXTRA_END_COURSE_ALARM_ID, -1);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context.getApplicationContext(), "course_channel")
-                .setContentTitle(title)
-                .setSmallIcon(R.drawable.ic_action_edit)
-                .setContentText("here you go")
-                .setAutoCancel(true)
-                .setDefaults(NotificationCompat.DEFAULT_ALL)
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setContentIntent(pendingIntent);
+        if(startAlarmId > -1) {
+            PendingIntent pendingIntent1 = PendingIntent.getActivity(context, intent.getIntExtra(CourseDetailsActivity.EXTRA_START_COURSE_ALARM_ID, -1), i, 0);
+            String title = intent.getStringExtra(ALARM_TITLE);
 
-        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
-        notificationManagerCompat.notify(1, builder.build());
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(context.getApplicationContext(), "course_channel")
+                    .setContentTitle(title)
+                    .setSmallIcon(R.drawable.ic_action_edit)
+                    .setContentText("Course Start Alarm")
+                    .setAutoCancel(true)
+                    .setDefaults(NotificationCompat.DEFAULT_ALL)
+                    .setContentIntent(pendingIntent1);
+
+            NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
+            notificationManagerCompat.notify(1, builder.build());
+        } else if(endAlarmId > -1){
+            PendingIntent pendingIntent2 = PendingIntent.getActivity(context, intent.getIntExtra(CourseDetailsActivity.EXTRA_END_COURSE_ALARM_ID, -1), i, 0);
+
+            String title = intent.getStringExtra(ALARM_TITLE);
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(context.getApplicationContext(), "course_channel")
+                    .setContentTitle(title)
+                    .setSmallIcon(R.drawable.ic_action_edit)
+                    .setContentText("Course End Alarm")
+                    .setAutoCancel(true)
+                    .setDefaults(NotificationCompat.DEFAULT_ALL)
+                    .setContentIntent(pendingIntent2);
+
+            NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
+            notificationManagerCompat.notify(1, builder.build());
+        }
 
     }
 }

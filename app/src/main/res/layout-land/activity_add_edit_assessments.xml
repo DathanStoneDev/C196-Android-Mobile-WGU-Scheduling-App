@@ -13,32 +13,34 @@
         android:id="@+id/textView21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="96dp"
+        android:layout_marginEnd="244dp"
         android:text="End Date"
-        app:layout_constraintBottom_toTopOf="@+id/assessment_end_date_view"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:text="Assessment Types"
         app:layout_constraintBottom_toTopOf="@+id/assessment_types_spinner"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
         android:id="@+id/assessment_types_spinner"
-        android:layout_width="372dp"
+        android:layout_width="340dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="92dp"
+        android:layout_marginStart="16dp"
         app:layout_constraintBottom_toTopOf="@+id/edit_assessment_button"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/assessment_end_date_picker"
-        android:layout_width="42dp"
-        android:layout_height="34dp"
+        android:layout_width="35dp"
+        android:layout_height="27dp"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="@+id/assessment_end_date_view"
         app:layout_constraintTop_toTopOf="@+id/assessment_end_date_view"
@@ -47,28 +49,28 @@
 
     <TextView
         android:id="@+id/assessment_start_date_view"
-        android:layout_width="142dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="126dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="164dp"
         android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/assessmentTitleInput" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
     <TextView
         android:id="@+id/assessment_end_date_view"
-        android:layout_width="137dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="136dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="168dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/assessmentTitleInput" />
+        app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
     <ImageButton
         android:id="@+id/assessment_start_date_picker"
-        android:layout_width="39dp"
-        android:layout_height="34dp"
+        android:layout_width="33dp"
+        android:layout_height="30dp"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="@+id/assessment_start_date_view"
         app:layout_constraintTop_toTopOf="@+id/assessment_start_date_view"
@@ -79,19 +81,17 @@
         android:id="@+id/assessmentTitleInput"
         android:layout_width="256dp"
         android:layout_height="48dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <Spinner
         android:id="@+id/course_assessment_spinner"
-        android:layout_width="372dp"
+        android:layout_width="341dp"
         android:layout_height="48dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView19"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="68dp"
+        app:layout_constraintBottom_toTopOf="@+id/assessment_types_spinner"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 
@@ -99,17 +99,17 @@
         android:id="@+id/edit_assessment_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="128dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginStart="448dp"
+        android:layout_marginBottom="16dp"
         android:text="Edit Assessment"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:text="Courses"
         app:layout_constraintBottom_toTopOf="@+id/course_assessment_spinner"
         app:layout_constraintStart_toStartOf="parent" />
@@ -118,8 +118,9 @@
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="228dp"
         android:text="Start Date"
-        app:layout_constraintBottom_toTopOf="@+id/assessment_start_date_view"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -49,9 +49,10 @@ public class CoursesActivity extends AppCompatActivity {
                 String instructorName = data.getStringExtra(CourseDetailsActivity.EXTRA_COURSE_INSTRUCTOR_NAME);
                 String instructorPhone = data.getStringExtra(CourseDetailsActivity.EXTRA_COURSE_INSTRUCTOR_PHONE);
                 String instructorEmail = data.getStringExtra(CourseDetailsActivity.EXTRA_COURSE_INSTRUCTOR_EMAIL);
-                int courseAlarmId = data.getIntExtra(CourseDetailsActivity.EXTRA_COURSE_ALARM_ID, -1);
+                int startCourseAlarmId = data.getIntExtra(CourseDetailsActivity.EXTRA_START_COURSE_ALARM_ID, -1);
+                int endCourseAlarmId = data.getIntExtra(CourseDetailsActivity.EXTRA_END_COURSE_ALARM_ID, -1);
 
-                Course course = new Course(title, startDate, endDate, status, notes, termId, instructorName, instructorPhone, instructorEmail, courseAlarmId);
+                Course course = new Course(title, startDate, endDate, status, notes, termId, instructorName, instructorPhone, instructorEmail, startCourseAlarmId, endCourseAlarmId);
                 courseViewModel.insert(course);
 
             } else if (code == RESULT_OK && data.hasExtra(CourseDetailsActivity.EXTRA_COURSE_ID)) {
@@ -65,9 +66,10 @@ public class CoursesActivity extends AppCompatActivity {
                 String instructorName = data.getStringExtra(CourseDetailsActivity.EXTRA_COURSE_INSTRUCTOR_NAME);
                 String instructorPhone = data.getStringExtra(CourseDetailsActivity.EXTRA_COURSE_INSTRUCTOR_PHONE);
                 String instructorEmail = data.getStringExtra(CourseDetailsActivity.EXTRA_COURSE_INSTRUCTOR_EMAIL);
-                int courseAlarmId = data.getIntExtra(CourseDetailsActivity.EXTRA_COURSE_ALARM_ID, -1);
+                int startCourseAlarmId = data.getIntExtra(CourseDetailsActivity.EXTRA_START_COURSE_ALARM_ID, -1);
+                int endCourseAlarmId = data.getIntExtra(CourseDetailsActivity.EXTRA_END_COURSE_ALARM_ID, -1);
 
-                Course course = new Course(title, startDate, endDate, status, notes, termId, instructorName, instructorPhone, instructorEmail, courseAlarmId);
+                Course course = new Course(title, startDate, endDate, status, notes, termId, instructorName, instructorPhone, instructorEmail, startCourseAlarmId, endCourseAlarmId);
                 course.setCourseId(courseId);
                 courseViewModel.update(course);
 
@@ -80,6 +82,8 @@ public class CoursesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses);
 
+        setTitle("Courses");
+
         RecyclerView recyclerView = findViewById(R.id.recycler_view_courses);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -88,12 +92,28 @@ public class CoursesActivity extends AppCompatActivity {
             @Override
             public void deleteCourse(CourseWithAssessments delete) {
 
-                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                Intent myIntent = new Intent(getApplicationContext(), CourseAlertReceiver.class);
+                AlarmManager alarmManager;
+
+                System.out.println(delete.course.getStartCourseAlarmId());
+                System.out.println(delete.course.getEndCourseAlarmId());
+
+                //Cancel start Alarm
+                alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                Intent startAlarmIntent = new Intent(getApplicationContext(), CourseAlertReceiver.class);
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                        getApplicationContext(), delete.course.getCourseAlarmId(), myIntent,
+                        getApplicationContext(), delete.course.getStartCourseAlarmId(), startAlarmIntent,
                         PendingIntent.FLAG_CANCEL_CURRENT);
                 alarmManager.cancel(pendingIntent);
+
+
+                // Cancel end alarm
+                Intent endAlarmIntent = new Intent(getApplicationContext(), CourseAlertReceiver.class);
+                PendingIntent pendingEndIntent = PendingIntent.getBroadcast(
+                        getApplicationContext(), delete.course.getEndCourseAlarmId(), endAlarmIntent,
+                        PendingIntent.FLAG_CANCEL_CURRENT);
+                alarmManager.cancel(pendingEndIntent);
+
+                //Delete the course entirely.
                 courseViewModel.delete(delete.course);
             }
 
@@ -110,7 +130,8 @@ public class CoursesActivity extends AppCompatActivity {
                 intent.putExtra(CourseDetailsActivity.EXTRA_COURSE_INSTRUCTOR_NAME, details.course.getInstructorName());
                 intent.putExtra(CourseDetailsActivity.EXTRA_COURSE_INSTRUCTOR_PHONE, details.course.getInstructorPhoneNumber());
                 intent.putExtra(CourseDetailsActivity.EXTRA_COURSE_INSTRUCTOR_EMAIL, details.course.getInstructorEmail());
-                intent.putExtra(CourseDetailsActivity.EXTRA_COURSE_ALARM_ID, details.course.getCourseAlarmId());
+                intent.putExtra(CourseDetailsActivity.EXTRA_START_COURSE_ALARM_ID, details.course.getStartCourseAlarmId());
+                intent.putExtra(CourseDetailsActivity.EXTRA_END_COURSE_ALARM_ID, details.course.getEndCourseAlarmId());
                 List courseAssessments = details.getAssessments();
                 intent.putParcelableArrayListExtra(CourseDetailsActivity.EXTRA_ASSESSMENTS_IN_COURSE, (ArrayList<? extends Parcelable>) courseAssessments);
 
